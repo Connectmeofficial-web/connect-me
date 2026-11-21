@@ -3,251 +3,642 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#17132f">
 <title>CONNECT ME - Social Network</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f0eff5;color:#222;font-family:Arial,sans-serif}
-button{cursor:pointer;border:0;font-weight:bold}
-.top{background:#17132f;color:white;padding:13px 16px;position:sticky;top:0;z-index:10}
-.brand{font-size:27px;font-weight:900;color:#c5a5ff}
-.brand span{color:white}
-.toprow{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.round{width:39px;height:39px;border-radius:50%;background:#332b50;color:white;font-size:19px}
-.tabs{display:flex;justify-content:space-around;background:white;padding:13px 3px;position:sticky;top:64px;z-index:9;border-bottom:1px solid #ddd}
-.tabs button{background:white;color:#554b69;font-size:19px}
-.tabs button.active{color:#7044d8;border-bottom:3px solid #7044d8}
-main{max-width:720px;margin:auto}
-.card{background:white;margin:10px 0;padding:15px;border-radius:14px}
-.stories{display:flex;gap:10px;overflow-x:auto;padding:10px}
-.story{min-width:112px;height:175px;border-radius:13px;overflow:hidden;background:linear-gradient(145deg,#7650d5,#24173e);color:white;display:flex;flex-direction:column;justify-content:space-between;padding:10px;font-size:13px;font-weight:bold}
-.story:first-child{background:linear-gradient(145deg,#eee8fa,#c5a5ff);color:#38265c}
-.story button{border-radius:50%;width:35px;height:35px;background:#7044d8;color:white;font-size:24px}
-.avatar{width:43px;height:43px;border-radius:50%;background:#7044d8;color:white;display:grid;place-items:center;font-weight:bold;flex-shrink:0}
-.row{display:flex;align-items:center;gap:10px}
-.composer{border:0;border-radius:30px;background:#f0eff5;padding:14px;flex:1;text-align:left;color:#777}
-.tools{display:flex;justify-content:space-around;border-top:1px solid #eee;padding-top:12px;margin-top:12px}
-.tools button{background:white;color:#66527e;font-size:13px}
-.posthead{display:flex;align-items:center;gap:10px}
-.posttext{line-height:1.6;white-space:pre-wrap}
-.postimage{width:100%;max-height:430px;object-fit:cover;border-radius:8px;margin-top:10px}
-.postactions{display:flex;justify-content:space-around;border-top:1px solid #eee;padding-top:12px;margin-top:12px}
-.postactions button{background:white;color:#66527e}
-input,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:9px;margin:7px 0;font-size:15px}
-.primary{background:#7044d8;color:white;padding:13px 20px;border-radius:9px}
-.full{width:100%}
+body{margin:0;background:#f0eff6;color:#242137;font-family:Arial,sans-serif}
+button{cursor:pointer;font-weight:600;border:0}
 .hidden{display:none!important}
-.muted{color:#888;font-size:12px}
-#auth{max-width:450px;margin:35px auto;padding:12px}
-footer{text-align:center;color:#888;padding:25px}
-@media(min-width:750px){main{padding:0 15px}.toprow{max-width:1100px;margin:auto}}
+header{background:#17132f;color:white;padding:15px;position:sticky;top:0;z-index:20}
+.header-row{max-width:850px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-size:27px;font-weight:900;color:#c7a5ff}
+.brand span{color:white}
+.header-actions{display:flex;gap:8px}
+.circle{width:39px;height:39px;border-radius:50%;background:#342b50;color:white;font-size:20px}
+nav{display:flex;justify-content:space-around;background:white;padding:13px 2px;position:sticky;top:69px;z-index:15;box-shadow:0 2px 5px #0001}
+nav button{background:white;color:#625b70;font-size:20px;padding:6px}
+nav button.active{color:#7044d8;border-bottom:3px solid #7044d8}
+main{max-width:720px;margin:auto;padding:8px 12px}
+.card{background:white;padding:17px;border-radius:16px;margin:12px 0;box-shadow:0 3px 15px #211b3808}
+.row{display:flex;align-items:center;gap:11px}
+.avatar{height:45px;width:45px;flex-shrink:0;border-radius:50%;background:#7044d8;color:white;display:grid;place-items:center;font-size:18px;font-weight:bold}
+.muted{color:#888;font-size:13px}
+.primary{background:#7044d8;color:white;padding:13px 19px;border-radius:10px}
+.secondary{background:#eeeaf7;color:#51358b;padding:12px;border-radius:10px}
+.full{width:100%;margin-top:10px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;margin:7px 0;font-size:15px;background:white}
+textarea{resize:vertical}
+label{display:flex;align-items:center;gap:10px;margin:14px 0}
+label input{width:auto;margin:0;accent-color:#7044d8}
+hr{border:0;border-top:1px solid #eee;margin:18px 0}
+#auth{max-width:440px;margin:35px auto;padding:12px}
+#auth .card{padding:25px}
+#auth h2{color:#7044d8}
+.switch{text-align:center;color:#7044d8;cursor:pointer;margin-top:18px}
+.stories{display:flex;gap:10px;overflow-x:auto;padding:10px 0}
+.story{min-width:110px;height:165px;border-radius:13px;background:linear-gradient(145deg,#7044d8,#25153e);color:white;padding:12px;display:flex;flex-direction:column;justify-content:space-between;font-size:13px}
+.story:first-child{background:linear-gradient(145deg,#e8ddff,#c4a6ff);color:#30204c}
+.story button{border-radius:50%;height:35px;width:35px;background:#7044d8;color:white;font-size:23px}
+.composer{background:#f1eff7;border-radius:30px;padding:14px;color:#777;flex:1}
+.post{background:white;padding:17px;border-radius:15px;margin:12px 0}
+.post-text{line-height:1.6;white-space:pre-wrap}
+.post-image{width:100%;max-height:450px;object-fit:contain;border-radius:10px;margin-top:10px}
+.post-actions{display:flex;justify-content:space-around;border-top:1px solid #eee;margin-top:13px;padding-top:13px}
+.post-actions button{background:white;color:#66527e}
+.online{height:11px;width:11px;background:#22ad63;border:2px solid white;border-radius:50%;display:inline-block}
+.offline{height:11px;width:11px;background:#999;border:2px solid white;border-radius:50%;display:inline-block}
+.chat-item{background:#f3f0fa;padding:12px;border-radius:12px;margin:10px 0;overflow-wrap:anywhere}
+.message-mine{text-align:right;background:#e8ddff;padding:12px;border-radius:13px;margin:10px 0;margin-left:18%}
+.message-other{text-align:left;background:#f0eff5;padding:12px;border-radius:13px;margin:10px 18% 10px 0}
+.settings-item{padding:12px 0}
+footer{text-align:center;padding:25px;color:#888;font-size:13px}
+@media(min-width:600px){main{padding:12px 20px}}
 </style>
 </head>
+
 <body>
 
-<header class="top">
-<div class="toprow">
+<header>
+<div class="header-row">
 <div>
 <div class="brand">CONNECT <span>ME</span></div>
 <small>Connect. Share. Inspire. Grow.</small>
 </div>
-<button class="round" onclick="alert('Create menu coming soon')">＋</button>
-<button class="round" onclick="alert('Search coming soon')">⌕</button>
-<button class="round" onclick="alert('Messages coming soon')">✉</button>
+<div class="header-actions">
+<button class="circle" onclick="showPage('create')">＋</button>
+<button class="circle" onclick="showPage('messages')">✉</button>
+<button class="circle" onclick="showPage('settings')">⚙</button>
+</div>
 </div>
 </header>
 
+<!-- LOGIN AND REGISTRATION -->
+
 <section id="auth">
 <div class="card">
-<h2 id="formTitle">Welcome to CONNECT ME 💜</h2>
-<p class="muted">Connect with your community.</p>
+<h2 id="authTitle">Welcome to CONNECT ME 💜</h2>
+<p class="muted">Connect with friends. Share your moments.</p>
+
 <div id="registerFields" class="hidden">
 <input id="fullName" placeholder="Full name">
 </div>
+
 <input id="email" type="email" placeholder="Email address">
 <input id="password" type="password" placeholder="Password">
+
 <div id="confirmField" class="hidden">
-<input id="confirm" type="password" placeholder="Confirm password">
+<input id="confirmPassword" type="password" placeholder="Confirm password">
 </div>
-<button class="primary full" id="submit" onclick="login()">Login</button>
-<p id="switch" style="text-align:center;color:#7044d8;cursor:pointer" onclick="toggle()">New here? Register</p>
-<p class="muted">Demonstration only. Real secure accounts will be added later.</p>
+
+<button id="authButton" class="primary full" onclick="authenticate()">Login</button>
+
+<p class="switch" id="switchAuth" onclick="toggleAuth()">New here? Create an account</p>
+
+<p class="muted">
+Demonstration version. Real account authentication will be connected to a secure backend.
+</p>
 </div>
 </section>
 
+<!-- SOCIAL NETWORK -->
+
 <section id="social" class="hidden">
-<nav class="tabs">
-<button class="active" onclick="tab(this,'feed')">⌂</button>
-<button onclick="tab(this,'reels')">▣</button>
-<button onclick="tab(this,'friends')">♧</button>
-<button onclick="tab(this,'market')">▤</button>
-<button onclick="tab(this,'notifications')">♧</button>
-<button onclick="tab(this,'profile')">●</button>
+
+<nav>
+<button class="active" onclick="showPage('home',this)">⌂</button>
+<button onclick="showPage('reels',this)">▣</button>
+<button onclick="showPage('friends',this)">♧</button>
+<button onclick="showPage('market',this)">▤</button>
+<button onclick="showPage('notifications',this)">♧</button>
+<button onclick="showPage('profile',this)">●</button>
 </nav>
 
 <main>
-<div id="feed">
+
+<!-- HOME -->
+
+<section id="home">
+
 <div class="card">
-<div style="font-weight:bold;margin-bottom:12px">Stories</div>
+<b>Stories</b>
 <div class="stories">
 <div class="story">
-<button onclick="createStory()">＋</button>
+<button onclick="alert('Story feature coming soon!')">＋</button>
 <span>Create Story</span>
 </div>
-<div class="story">
-<span>💜</span><span>Connect Me Community</span>
-</div>
-<div class="story">
-<span>✨</span><span>Share your moments</span>
-</div>
-<div class="story">
-<span>🌟</span><span>Inspire others</span>
-</div>
+<div class="story"><span>💜</span><span>Connect Me Community</span></div>
+<div class="story"><span>✨</span><span>Share your moments</span></div>
+<div class="story"><span>🌟</span><span>Inspire others</span></div>
 </div>
 </div>
 
 <div class="card">
 <div class="row">
-<div class="avatar" id="smallAvatar">Y</div>
-<button class="composer" onclick="document.getElementById('postText').focus()">What's on your mind?</button>
+<div class="avatar" id="smallAvatar">C</div>
+<div class="composer" onclick="document.getElementById('postText').focus()">
+What's on your mind?
 </div>
-<textarea id="postText" rows="2" placeholder="Write something to your community..."></textarea>
-<input type="file" id="photo" accept="image/*">
-<button class="primary full" onclick="publish()">Publish Post</button>
 </div>
 
-<div id="posts">
-<article class="card">
-<div class="posthead">
-<div class="avatar">CM</div>
-<div><b>CONNECT ME</b><div class="muted">Community · Welcome post</div></div>
+<textarea id="postText" rows="2" placeholder="Write something..."></textarea>
+<input id="photoInput" type="file" accept="image/*">
+<button class="primary full" onclick="publishPost()">Publish Post</button>
 </div>
-<p class="posttext">Welcome to CONNECT ME! 💜
-Connect with friends, share your moments and inspire the community.</p>
-<div class="postactions">
-<button onclick="like(this)">♡ Like</button>
-<button onclick="comment(this)">Comment</button>
-<button onclick="share()">Share</button>
+
+<div id="feed">
+
+<article class="post">
+<div class="row">
+<div class="avatar">CM</div>
+<div>
+<b>CONNECT ME</b>
+<div class="muted">Official community · Welcome post</div>
+</div>
+</div>
+<p class="post-text">Welcome to CONNECT ME! 💜
+Connect with people, share your thoughts and inspire the community.</p>
+<div class="post-actions">
+<button onclick="likePost(this)">♡ Like</button>
+<button onclick="alert('Comment feature will be upgraded soon.')">Comment</button>
+<button onclick="sharePost()">Share</button>
 </div>
 </article>
-</div>
-</div>
 
-<div id="reels" class="card hidden"><h2>Reels</h2><p>Short videos are coming soon. 🎬</p></div>
-<div id="friends" class="card hidden"><h2>Friends</h2><p>Discover and connect with people. 👥</p></div>
-<div id="market" class="card hidden"><h2>Marketplace</h2><p>Community marketplace coming soon. 🛍️</p></div>
-<div id="notifications" class="card hidden"><h2>Notifications</h2><p>Your notifications will appear here. 🔔</p></div>
+</div>
+</section>
 
-<div id="profile" class="card hidden">
+<!-- REELS -->
+
+<section id="reels" class="card hidden">
+<h2>🎬 Reels</h2>
+<p>Discover short videos and creative moments.</p>
+<p class="muted">Video uploading will be added in a future version.</p>
+</section>
+
+<!-- FRIENDS -->
+
+<section id="friends" class="card hidden">
+<h2>👥 Friends</h2>
+<p>Find people and build meaningful connections.</p>
+<p class="muted">Online friends and friend requests will be connected to the online database later.</p>
+</section>
+
+<!-- MARKETPLACE -->
+
+<section id="market" class="card hidden">
+<h2>🛍️ Marketplace</h2>
+<p>Discover products and services in your community.</p>
+</section>
+
+<!-- NOTIFICATIONS -->
+
+<section id="notifications" class="card hidden">
+<h2>🔔 Notifications</h2>
+<p>Welcome to CONNECT ME!</p>
+<p class="muted">Your notification centre.</p>
+</section>
+
+<!-- PROFILE -->
+
+<section id="profile" class="card hidden">
 <h2>My Profile</h2>
-<div class="avatar" id="profileAvatar">Y</div>
-<h3 id="profileName">Your Name</h3>
+<div class="avatar" id="profileAvatar">C</div>
+<h2 id="profileName">Your Name</h2>
 <p id="profileEmail" class="muted"></p>
-<p>Welcome to Connect Me! 💜</p>
+<p id="profileVisibility">Public Profile</p>
+<p id="profileActive">Active status enabled</p>
+<p>Connect. Share. Inspire. Grow. 💜</p>
+<button class="secondary" onclick="showPage('settings')">Edit Settings</button>
 <button class="primary" onclick="logout()">Logout</button>
+</section>
+
+<!-- MESSAGES -->
+
+<section id="messages" class="card hidden">
+<h2>💬 Messages</h2>
+<p class="muted">Your Connect Me inbox</p>
+
+<div class="chat-item">
+<div class="row">
+<div class="avatar">CM</div>
+<div>
+<b>Connect Me Community</b>
+<div class="muted">Welcome to Connect Me Messages</div>
 </div>
+</div>
+</div>
+
+<div id="chatMessages"></div>
+
+<textarea id="messageText" rows="3" placeholder="Write a message..."></textarea>
+<button class="primary full" onclick="sendMessage()">Send Message</button>
+
+<p class="muted">Messages are currently stored only in this browser. Online messaging will require a backend.</p>
+</section>
+
+<!-- SETTINGS -->
+
+<section id="settings" class="card hidden">
+
+<h2>⚙ Settings & Privacy</h2>
+
+<div class="settings-item">
+<h3>🔐 Account Security</h3>
+<p class="muted">Manage your account security.</p>
+<button class="secondary" onclick="alert('Real password changes will be available after secure authentication is connected.')">
+Change Password
+</button>
+</div>
+
+<hr>
+
+<div class="settings-item">
+<h3>🌍 Privacy</h3>
+
+<label>
+<input type="checkbox" id="publicProfile" checked onchange="saveSettings()">
+Public Profile
+</label>
+
+<p class="muted">This is currently a local preference, not an enforced public/private access control.</p>
+</div>
+
+<hr>
+
+<div class="settings-item">
+<h3>💾 Remember Login</h3>
+<label>
+<input type="checkbox" id="rememberLogin" onchange="saveSettings()">
+Remember my login on this device
+</label>
+<p class="muted">Only your demo profile information is remembered, never your password.</p>
+</div>
+
+<hr>
+
+<div class="settings-item">
+<h3>🟢 Active Status</h3>
+<label>
+<input type="checkbox" id="activeStatus" checked onchange="saveSettings()">
+Show when I am active
+</label>
+</div>
+
+<hr>
+
+<div class="settings-item">
+<h3>💬 Message Privacy</h3>
+<select id="messagePrivacy" onchange="saveSettings()">
+<option value="everyone">Everyone can message me</option>
+<option value="friends">Friends only</option>
+<option value="nobody">Nobody</option>
+</select>
+</div>
+
+<hr>
+
+<p id="settingsStatus" class="muted">Settings are saved on this device.</p>
+
+<button class="primary full" onclick="logout()">Logout</button>
+
+</section>
+
 </main>
 </section>
 
-<footer>© 2026 CONNECT ME · Connect. Share. Inspire. Grow.</footer>
+<footer>
+© 2026 CONNECT ME
+<br>Connect. Share. Inspire. Grow. 💜
+</footer>
 
 <script>
-let register=false;
-let user=null;
 
-function toggle(){
-register=!register;
-document.getElementById('registerFields').classList.toggle('hidden',!register);
-document.getElementById('confirmField').classList.toggle('hidden',!register);
-document.getElementById('formTitle').innerText=register?'Create Your Account 💜':'Welcome to CONNECT ME 💜';
-document.getElementById('submit').innerText=register?'Register':'Login';
-document.getElementById('switch').innerText=register?'Already a member? Login':'New here? Register';
+let registerMode=false;
+let currentUser=null;
+
+const settingsKey='connectMeSettings';
+const accountKey='connectMeDemoProfile';
+
+function toggleAuth(){
+
+registerMode=!registerMode;
+
+document.getElementById('registerFields').classList.toggle('hidden',!registerMode);
+document.getElementById('confirmField').classList.toggle('hidden',!registerMode);
+
+document.getElementById('authTitle').innerText=
+registerMode?'Create Your Account 💜':'Welcome to CONNECT ME 💜';
+
+document.getElementById('authButton').innerText=
+registerMode?'Register':'Login';
+
+document.getElementById('switchAuth').innerText=
+registerMode?'Already a member? Login':'New here? Create an account';
 }
 
-function login(){
-let email=document.getElementById('email').value.trim();
-let password=document.getElementById('password').value;
+function authenticate(){
+
+const email=document.getElementById('email').value.trim();
+const password=document.getElementById('password').value;
 let name=document.getElementById('fullName').value.trim();
-if(!email||!password){alert('Enter your email and password.');return;}
-if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Enter a valid email.');return;}
-if(register){
-if(!name){alert('Enter your name.');return;}
-if(password.length<8){alert('Use at least 8 characters.');return;}
-if(password!==document.getElementById('confirm').value){alert('Passwords do not match.');return;}
-}else{name='Connect Me Member';}
-user={name,email};
+
+if(!email||!password){
+alert('Please enter your email and password.');
+return;
+}
+
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+alert('Please enter a valid email address.');
+return;
+}
+
+if(registerMode){
+
+if(!name){
+alert('Please enter your name.');
+return;
+}
+
+if(password.length<8){
+alert('Please use at least 8 characters.');
+return;
+}
+
+if(password!==document.getElementById('confirmPassword').value){
+alert('Passwords do not match.');
+return;
+}
+
+}else{
+name='Connect Me Member';
+}
+
+currentUser={name,email};
+
+enterApp();
+}
+
+function enterApp(){
+
 document.getElementById('auth').classList.add('hidden');
 document.getElementById('social').classList.remove('hidden');
-document.getElementById('profileName').innerText=name;
-document.getElementById('profileEmail').innerText=email;
-document.getElementById('profileAvatar').innerText=name[0].toUpperCase();
-document.getElementById('smallAvatar').innerText=name[0].toUpperCase();
+
+document.getElementById('profileName').innerText=currentUser.name;
+document.getElementById('profileEmail').innerText=currentUser.email;
+
+const initial=currentUser.name.charAt(0).toUpperCase();
+
+document.getElementById('profileAvatar').innerText=initial;
+document.getElementById('smallAvatar').innerText=initial;
+
+loadSettings();
+showPage('home');
 }
 
 function logout(){
-user=null;
+
+currentUser=null;
+
+sessionStorage.removeItem('connectMeSession');
+
 document.getElementById('social').classList.add('hidden');
 document.getElementById('auth').classList.remove('hidden');
+
 document.getElementById('email').value='';
 document.getElementById('password').value='';
-if(register)toggle();
+document.getElementById('fullName').value='';
+document.getElementById('confirmPassword').value='';
+
+if(registerMode)toggleAuth();
 }
 
-function tab(button,id){
-document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
-button.classList.add('active');
-['feed','reels','friends','market','notifications','profile'].forEach(x=>{
-document.getElementById(x).classList.toggle('hidden',x!==id);
+function showPage(page,button){
+
+const pages=[
+'home','reels','friends','market',
+'notifications','profile','messages','settings'
+];
+
+pages.forEach(id=>{
+document.getElementById(id).classList.toggle('hidden',id!==page);
 });
+
+document.querySelectorAll('nav button').forEach(b=>{
+b.classList.remove('active');
+});
+
+if(button)button.classList.add('active');
+
+if(page==='settings')loadSettings();
+if(page==='profile')updateProfile();
 }
 
-function like(button){
+function likePost(button){
+
 button.innerText=button.innerText.includes('Liked')?'♡ Like':'♥ Liked';
+
 }
 
-function comment(){
-alert('Comments will be developed in the next update.');
+function sharePost(){
+
+if(navigator.share){
+navigator.share({
+title:'CONNECT ME',
+text:'Join the CONNECT ME social community!'
+}).catch(()=>{});
+}else{
+alert('Share CONNECT ME with your friends!');
 }
 
-function share(){
-if(navigator.share)navigator.share({title:'CONNECT ME',text:'Join the CONNECT ME community!'});
-else alert('Sharing is not supported by this browser.');
 }
 
-function publish(){
-let text=document.getElementById('postText').value.trim();
-let file=document.getElementById('photo').files[0];
-if(!text&&!file){alert('Write a post or select a photo.');return;}
-let article=document.createElement('article');
-article.className='card';
-let heading=document.createElement('b');
-heading.textContent=user?user.name:'Member';
-let content=document.createElement('p');
-content.className='posttext';
-content.textContent=text;
-article.append(heading,content);
+function publishPost(){
+
+const text=document.getElementById('postText').value.trim();
+const file=document.getElementById('photoInput').files[0];
+
+if(!text&&!file){
+alert('Please write something or select a photo.');
+return;
+}
+
+const article=document.createElement('article');
+article.className='post';
+
+const heading=document.createElement('div');
+heading.className='row';
+
+const avatar=document.createElement('div');
+avatar.className='avatar';
+avatar.textContent=currentUser.name.charAt(0).toUpperCase();
+
+const name=document.createElement('b');
+name.textContent=currentUser.name;
+
+heading.append(avatar,name);
+article.append(heading);
+
+if(text){
+const paragraph=document.createElement('p');
+paragraph.className='post-text';
+paragraph.textContent=text;
+article.append(paragraph);
+}
+
 if(file){
-let img=document.createElement('img');
-img.className='postimage';
-img.src=URL.createObjectURL(file);
-article.append(img);
-}
-let actions=document.createElement('div');
-actions.className='postactions';
-let button=document.createElement('button');
-button.textContent='♡ Like';
-button.onclick=()=>like(button);
-actions.append(button);
-article.append(actions);
-document.getElementById('posts').prepend(article);
-document.getElementById('postText').value='';
-document.getElementById('photo').value='';
+
+if(!file.type.startsWith('image/')){
+alert('Please select an image.');
+return;
 }
 
-function createStory(){
-alert('Story creation is coming in a future update.');
+const image=document.createElement('img');
+image.className='post-image';
+image.src=URL.createObjectURL(file);
+article.append(image);
 }
+
+const actions=document.createElement('div');
+actions.className='post-actions';
+
+const like=document.createElement('button');
+like.textContent='♡ Like';
+like.onclick=()=>likePost(like);
+
+const comment=document.createElement('button');
+comment.textContent='Comment';
+comment.onclick=()=>alert('Comments coming soon.');
+
+const share=document.createElement('button');
+share.textContent='Share';
+share.onclick=sharePost;
+
+actions.append(like,comment,share);
+article.append(actions);
+
+document.getElementById('feed').prepend(article);
+
+document.getElementById('postText').value='';
+document.getElementById('photoInput').value='';
+
+showPage('home');
+
+}
+
+function sendMessage(){
+
+const field=document.getElementById('messageText');
+const message=field.value.trim();
+
+if(!message)return;
+
+const item=document.createElement('div');
+item.className='message-mine';
+item.textContent=message;
+
+document.getElementById('chatMessages').append(item);
+
+field.value='';
+
+}
+
+function saveSettings(){
+
+const settings={
+publicProfile:document.getElementById('publicProfile').checked,
+rememberLogin:document.getElementById('rememberLogin').checked,
+activeStatus:document.getElementById('activeStatus').checked,
+messagePrivacy:document.getElementById('messagePrivacy').value
+};
+
+localStorage.setItem(settingsKey,JSON.stringify(settings));
+
+if(currentUser){
+
+if(settings.rememberLogin){
+localStorage.setItem(accountKey,JSON.stringify(currentUser));
+}else{
+localStorage.removeItem(accountKey);
+}
+
+}
+
+document.getElementById('settingsStatus').innerText=
+'Your preferences have been saved on this device.';
+
+updateProfile();
+
+}
+
+function loadSettings(){
+
+let saved=localStorage.getItem(settingsKey);
+
+let settings={
+publicProfile:true,
+rememberLogin:false,
+activeStatus:true,
+messagePrivacy:'everyone'
+};
+
+if(saved){
+try{
+settings={...settings,...JSON.parse(saved)};
+}catch(e){}
+}
+
+document.getElementById('publicProfile').checked=settings.publicProfile;
+document.getElementById('rememberLogin').checked=settings.rememberLogin;
+document.getElementById('activeStatus').checked=settings.activeStatus;
+document.getElementById('messagePrivacy').value=settings.messagePrivacy;
+
+updateProfile();
+
+}
+
+function updateProfile(){
+
+const publicProfile=document.getElementById('publicProfile').checked;
+const active=document.getElementById('activeStatus').checked;
+
+document.getElementById('profileVisibility').innerText=
+publicProfile?'🌍 Public Profile':'🔒 Private Preference';
+
+document.getElementById('profileActive').innerText=
+active?'🟢 Active status enabled':'⚪ Active status hidden';
+
+}
+
+function restoreDemoSession(){
+
+const saved=localStorage.getItem(accountKey);
+
+if(!saved)return;
+
+try{
+
+const profile=JSON.parse(saved);
+
+if(profile.name&&profile.email){
+
+currentUser=profile;
+enterApp();
+
+}
+
+}catch(e){
+
+localStorage.removeItem(accountKey);
+
+}
+
+}
+
+restoreDemoSession();
+
 </script>
 </body>
 </html>

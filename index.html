@@ -3,483 +3,200 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0866ff">
-<title>CONNECT ME - Social Network</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONNECT ME | Profile</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f0f2f5;font-family:Arial,sans-serif;color:#18202b}
-button{cursor:pointer;border:0;border-radius:9px;padding:11px;background:#0866ff;color:white;font-weight:bold}
-input,textarea,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:6px 0;font:inherit}
-header{background:#0866ff;color:white;padding:12px;position:sticky;top:0;z-index:20}
-.head{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.logo{font-size:23px;font-weight:900}
-.search{max-width:300px;border:0;border-radius:20px}
-.layout{max-width:1250px;margin:auto;display:grid;grid-template-columns:220px minmax(0,650px) 250px;gap:15px;padding:15px}
-.side{position:sticky;top:70px;height:calc(100vh - 90px);overflow:auto}
-.side button{display:block;width:100%;text-align:left;background:transparent;color:#26364a;margin-bottom:5px}
-.side button:hover{background:#dce8ff}
-.panel,.post{background:white;padding:15px;border-radius:12px;margin-bottom:13px;box-shadow:0 1px 3px #ddd}
-h3{margin:5px 0 12px}
-.hidden{display:none!important}
-.page-title{font-size:22px;font-weight:bold;margin:8px 0 15px}
-.storyrow,.horizontal{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
-.storyrow::-webkit-scrollbar,.horizontal::-webkit-scrollbar{display:none}
-.story{flex:0 0 100px;height:145px;border-radius:12px;background:linear-gradient(140deg,#0866ff,#a044cf);color:white;padding:10px;display:flex;align-items:end;scroll-snap-align:start;font-weight:bold}
-.cardtile{flex:0 0 180px;padding:18px;background:#eaf1ff;border-radius:12px;scroll-snap-align:start}
-.avatar{width:38px;height:38px;border-radius:50%;background:#dce9ff;color:#0866ff;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;margin-right:8px}
-.posthead{display:flex;align-items:center;gap:8px}
-.postbody{line-height:1.5;overflow-wrap:anywhere}
-.postactions{display:flex;justify-content:space-around;gap:4px;border-top:1px solid #eee;margin-top:12px;padding-top:10px}
-.postactions button{background:white;color:#526276}
-.postactions button.active{color:#0866ff}
-.meta{font-size:12px;color:#777}
-.hero{background:linear-gradient(120deg,#0866ff,#7036d1);padding:22px;border-radius:13px;color:white;margin-bottom:14px}
-.item{padding:12px;border-bottom:1px solid #eee}
-.item button{margin-top:8px}
-.bottom{display:none}
-video{width:100%;border-radius:12px;background:#111}
-footer{text-align:center;padding:20px;color:#777}
-@media(max-width:850px){
-.layout{grid-template-columns:1fr;max-width:680px}
-.left,.right{display:none}
-}
-@media(max-width:600px){
-header{padding:10px}
-.logo{font-size:19px}
-.layout{padding:8px}
-.bottom{display:flex;position:sticky;bottom:0;background:white;justify-content:space-around;padding:8px 2px;z-index:30;border-top:1px solid #ddd}
-.bottom button{background:white;color:#0866ff;padding:9px;font-size:19px}
+body{margin:0;background:#f0f2f5;font-family:Arial,sans-serif;color:#1c1e21}
+header{height:58px;background:white;display:flex;align-items:center;
+justify-content:space-between;padding:0 15px;position:sticky;top:0;z-index:5;
+box-shadow:0 1px 4px #ccc}
+.logo{font-size:25px;font-weight:bold;color:#1877f2}
+.search{padding:10px;border:0;border-radius:22px;background:#f0f2f5;width:42%}
+.cover{height:260px;max-width:940px;margin:auto;background:linear-gradient(120deg,#1877f2,#8b5cf6);
+border-radius:0 0 10px 10px;position:relative}
+.cover button{position:absolute;right:15px;bottom:15px;border:0;
+padding:10px;border-radius:7px;cursor:pointer}
+.profile{max-width:900px;margin:auto;background:white;padding:15px;
+border-radius:0 0 10px 10px}
+.top{display:flex;align-items:end;gap:16px;flex-wrap:wrap}
+.avatar{width:145px;height:145px;border-radius:50%;border:5px solid white;
+background:#dbeafe;object-fit:cover;margin-top:-65px}
+.name{font-size:27px;font-weight:bold;margin:8px 0}
+.muted{color:#65676b;font-size:14px}
+.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+button{border:0;border-radius:7px;padding:10px 15px;font-weight:bold;cursor:pointer}
+.primary{background:#1877f2;color:white}
+.secondary{background:#e4e6eb;color:#1c1e21}
+.tabs{display:flex;gap:25px;overflow:auto;border-top:1px solid #ddd;
+margin-top:18px;padding-top:15px;white-space:nowrap}
+.tabs a{color:#65676b;text-decoration:none;font-weight:bold;padding:8px}
+.tabs a.active{color:#1877f2;border-bottom:3px solid #1877f2}
+.layout{max-width:900px;margin:18px auto;display:grid;
+grid-template-columns:1fr 1.5fr;gap:16px;padding:0 10px}
+.card{background:white;border-radius:10px;padding:16px;margin-bottom:15px}
+h3{margin:0 0 13px}
+.info{line-height:2;color:#444}
+.postbox{display:flex;gap:10px;align-items:center}
+.postbox input{flex:1;padding:13px;border:0;background:#f0f2f5;border-radius:25px}
+.post{background:white;border-radius:10px;padding:16px;margin-bottom:15px}
+.posthead{display:flex;gap:10px;align-items:center}
+.smallavatar{width:42px;height:42px;border-radius:50%;background:#dbeafe}
+.postcontent{padding:18px 0;line-height:1.5}
+.postbuttons{display:flex;justify-content:space-around;border-top:1px solid #ddd;
+padding-top:10px;color:#65676b}
+.postbuttons button{background:white;color:#65676b}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.photo-grid div{height:90px;background:#dbeafe;border-radius:5px}
+footer{text-align:center;color:#777;padding:25px}
+@media(max-width:650px){
+ .cover{height:190px;border-radius:0}
+ .layout{grid-template-columns:1fr}
+ .actions{margin:10px 0 0;width:100%}
+ .actions button{flex:1}
+ .avatar{width:115px;height:115px}
+ .name{font-size:23px}
 }
 </style>
 </head>
 <body>
 
 <header>
-<div class="head">
-<div class="logo">CONNECT ME 🌍</div>
-<input class="search" id="search" placeholder="Search CONNECT ME..." oninput="searchPosts()">
-<button onclick="show('notifications')">🔔</button>
-</div>
+ <div class="logo">CONNECT ME</div>
+ <input class="search" placeholder="Search CONNECT ME">
+ <div>🔔　☰</div>
 </header>
 
-<div class="layout">
-
-<!-- LEFT MENU -->
-<aside class="side left">
-<div class="panel">
-<h3>CONNECT ME</h3>
-<div id="accountName">👤 Guest User</div>
-<p class="meta">Your social world</p>
-</div>
-<div class="panel" id="leftMenu"></div>
-</aside>
-
-<!-- MAIN CONTENT -->
-<main>
-
-<section id="home" class="screen">
-<div class="hero">
-<h1>Welcome to CONNECT ME</h1>
-<p>Connect • Discover • Share • Grow</p>
-<button onclick="shareSite()">Invite Friends ↗</button>
+<div class="cover">
+ <button onclick="changeCover()">📷 Edit Cover Photo</button>
 </div>
 
-<div class="panel">
-<h3>⭕ Stories</h3>
-<div class="storyrow" id="stories">
-<div class="story">＋ Add Story</div>
-<div class="story">🌍 World</div>
-<div class="story">😂 Funny</div>
-<div class="story">❤️ Love</div>
-<div class="story">🎵 Music</div>
-<div class="story">⚽ Sports</div>
-</div>
-</div>
-
-<div class="panel">
-<h3>✍️ What's on your mind?</h3>
-<input id="postName" placeholder="Your name">
-<textarea id="postText" rows="3" placeholder="Share your thoughts with everyone..."></textarea>
-<select id="postCategory">
-<option>General</option>
-<option>News</option>
-<option>Funny</option>
-<option>Romantic</option>
-<option>Music</option>
-<option>Sports</option>
-<option>Education</option>
-</select>
-<button style="width:100%" onclick="publish()">Publish Post</button>
-</div>
-
-<h3>🌐 Public News Feed</h3>
-<div id="feed"></div>
+<section class="profile">
+ <div class="top">
+  <img class="avatar" id="avatar"
+  src="https://placehold.co/300x300/1877f2/ffffff?text=CM" alt="Profile photo">
+  <div>
+   <div class="name" id="profileName">Your Name</div>
+   <div class="muted"><span id="friendCount">0</span> friends ·
+   <span id="followerCount">0</span> followers</div>
+  </div>
+  <div class="actions">
+   <button class="primary" onclick="addStory()">＋ Add Story</button>
+   <button class="secondary" onclick="editProfile()">✎ Edit Profile</button>
+   <button class="secondary" onclick="alert('Profile options')">•••</button>
+  </div>
+ </div>
+ <p id="bio">Welcome to my CONNECT ME profile!</p>
+ <div class="tabs">
+  <a class="active" href="#posts">Posts</a>
+  <a href="#about">About</a>
+  <a href="#friends">Friends</a>
+  <a href="#photos">Photos</a>
+  <a href="#reels">Reels</a>
+ </div>
 </section>
 
-<section id="friends" class="screen hidden">
-<div class="page-title">👥 Friends & Followers</div>
-<div class="panel">
-<input id="friendName" placeholder="Enter a friend's name">
-<button onclick="addFriend()">Add Friend (Demo)</button>
-</div>
-<div class="panel" id="friendList">No friends added yet.</div>
-</section>
+<main class="layout">
+ <aside>
+  <div class="card" id="about">
+   <h3>Intro</h3>
+   <div class="info" id="intro">🌍 Living in India<br>📍 From Assam<br>🔗 CONNECT ME member</div>
+   <button class="secondary" style="width:100%" onclick="editProfile()">Edit details</button>
+  </div>
+  <div class="card" id="photos">
+   <h3>Photos</h3>
+   <div class="photo-grid"><div></div><div></div><div></div></div>
+  </div>
+  <div class="card" id="friends">
+   <h3>Friends</h3>
+   <p class="muted">Your friends will appear here.</p>
+  </div>
+ </aside>
 
-<section id="reels" class="screen hidden">
-<div class="page-title">▶ Reels & Videos</div>
-<div class="panel">
-<h3>Discover entertainment</h3>
-<div class="horizontal">
-<div class="cardtile">😂 Funny Videos<br><a target="_blank" href="https://www.youtube.com/results?search_query=funny+videos">Watch ↗</a></div>
-<div class="cardtile">❤️ Romantic Videos<br><a target="_blank" href="https://www.youtube.com/results?search_query=romantic+videos">Watch ↗</a></div>
-<div class="cardtile">🎵 Music<br><a target="_blank" href="https://www.youtube.com/results?search_query=music">Watch ↗</a></div>
-<div class="cardtile">🎭 Drama<br><a target="_blank" href="https://www.youtube.com/results?search_query=drama">Watch ↗</a></div>
-</div>
-</div>
-<div class="panel">
-<h3>Featured video demo</h3>
-<video controls muted loop playsinline>
-<source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-</video>
-</div>
-</section>
-
-<section id="messenger" class="screen hidden">
-<div class="page-title">💬 Messenger</div>
-<div class="panel">
-<h3>Demo Chat</h3>
-<div id="chatMessages" style="min-height:100px;padding:10px">Welcome to CONNECT ME Messenger.</div>
-<input id="chatInput" placeholder="Write a message...">
-<button onclick="sendMessage()">Send Message</button>
-<p class="meta">Demo only. Messages are stored in this browser, not sent to other users.</p>
-</div>
-</section>
-
-<section id="groups" class="screen hidden">
-<div class="page-title">👥 Groups & Communities</div>
-<div class="panel">
-<input id="groupName" placeholder="New community name">
-<button onclick="createGroup()">Create Group</button>
-<div id="groupList"></div>
-</div>
-</section>
-
-<section id="marketplace" class="screen hidden">
-<div class="page-title">🛍️ Marketplace</div>
-<div class="panel">
-<h3>List an item</h3>
-<input id="productName" placeholder="Product name">
-<input id="productPrice" placeholder="Price">
-<button onclick="addProduct()">Publish Listing</button>
-</div>
-<div id="productList"></div>
-</section>
-
-<section id="news" class="screen hidden">
-<div class="page-title">📰 News & Discover</div>
-<div class="panel">
-<a href="https://news.google.com/" target="_blank">🌍 Latest world news ↗</a>
-<hr>
-<a href="https://www.bbc.com/news" target="_blank">BBC News ↗</a>
-<hr>
-<a href="https://www.reuters.com/" target="_blank">Reuters ↗</a>
-</div>
-</section>
-
-<section id="live" class="screen hidden">
-<div class="page-title">🔴 Live Streaming</div>
-<div class="panel">
-<p>Start a live broadcast using a connected streaming service.</p>
-<a href="https://www.youtube.com/live" target="_blank">Open YouTube Live ↗</a>
-</div>
-</section>
-
-<section id="events" class="screen hidden">
-<div class="page-title">📅 Events</div>
-<div class="panel">
-<input id="eventName" placeholder="Event name">
-<input id="eventDate" type="date">
-<button onclick="addEvent()">Create Event</button>
-<div id="eventList"></div>
-</div>
-</section>
-
-<section id="pages" class="screen hidden">
-<div class="page-title">📢 Public Pages & Business</div>
-<div class="panel">
-<input id="pageName" placeholder="Page or business name">
-<button onclick="createPage()">Create Page</button>
-<div id="pageList"></div>
-</div>
-</section>
-
-<section id="notifications" class="screen hidden">
-<div class="page-title">🔔 Notifications</div>
-<div class="panel" id="notificationList">You're all caught up!</div>
-</section>
-
-<section id="saved" class="screen hidden">
-<div class="page-title">🔖 Saved Posts</div>
-<div id="savedList" class="panel">No saved posts yet.</div>
-</section>
-
-<section id="memories" class="screen hidden">
-<div class="page-title">🕰️ Memories</div>
-<div class="panel">Your saved moments and memories will appear here.</div>
-</section>
-
-<section id="creator" class="screen hidden">
-<div class="page-title">📊 Creator Dashboard</div>
-<div class="panel">
-<h3>Your activity</h3>
-<p>Posts published: <strong id="postCount">0</strong></p>
-<p>Likes received: <strong id="likeCount">0</strong></p>
-<p class="meta">Advanced analytics require a connected backend.</p>
-</div>
-</section>
-
-<section id="profile" class="screen hidden">
-<div class="page-title">👤 My Profile</div>
-<div class="panel">
-<div style="font-size:50px">👤</div>
-<input id="profileName" placeholder="Your display name">
-<textarea id="bio" placeholder="Write your profile bio"></textarea>
-<button onclick="saveProfile()">Save Profile</button>
-<div id="profileInfo"></div>
-</div>
-</section>
-
-<section id="settings" class="screen hidden">
-<div class="page-title">⚙️ Settings & Privacy</div>
-<div class="panel">
-<h3>Account settings</h3>
-<p>Manage your profile and privacy preferences.</p>
-<label><input type="checkbox" id="privateMode" style="width:auto"> Private profile (demo setting)</label>
-<hr>
-<button onclick="clearLocal()">Clear local demo data</button>
-<p class="meta">Real account security and privacy controls require a backend.</p>
-</div>
-</section>
-
+ <section id="posts">
+  <div class="card">
+   <div class="postbox">
+    <div class="smallavatar"></div>
+    <input id="postInput" placeholder="What's on your mind?">
+   </div>
+   <hr style="border:0;border-top:1px solid #eee;margin:15px 0">
+   <button class="secondary" onclick="publishPost()">📝 Create Post</button>
+   <button class="secondary" onclick="addPhoto()">📷 Photo</button>
+  </div>
+  <div id="feed">
+   <article class="post">
+    <div class="posthead">
+     <div class="smallavatar"></div>
+     <div><b id="postName">Your Name</b><div class="muted">Just now · 🌐</div></div>
+    </div>
+    <div class="postcontent">Welcome to my CONNECT ME profile! Connect. Discover. Share. Grow.</div>
+    <div class="postbuttons">
+     <button onclick="likePost(this)">👍 Like</button>
+     <button onclick="commentPost()">💬 Comment</button>
+     <button onclick="sharePost()">↗ Share</button>
+    </div>
+   </article>
+  </div>
+  <div class="card" id="reels"><h3>Reels</h3><p class="muted">Your reels will appear here.</p></div>
+ </section>
 </main>
-
-<!-- RIGHT MENU -->
-<aside class="side right">
-<div class="panel">
-<h3>✨ Discover</h3>
-<div class="item">📰 Latest news</div>
-<div class="item">😂 Entertainment</div>
-<div class="item">❤️ Romantic videos</div>
-<div class="item">🎵 Music</div>
-<div class="item">⚽ Sports</div>
-</div>
-<div class="panel">
-<h3>🤝 Community</h3>
-<p>Connect with people and discover new interests.</p>
-</div>
-</aside>
-</div>
-
-<!-- MOBILE MENU -->
-<div class="bottom">
-<button onclick="show('home')">🏠</button>
-<button onclick="show('friends')">👥</button>
-<button onclick="show('reels')">▶</button>
-<button onclick="show('messenger')">💬</button>
-<button onclick="show('profile')">👤</button>
-</div>
-
-<footer>CONNECT ME © 2026<br>Connect • Discover • Share • Grow</footer>
+<footer>CONNECT ME · Connect. Discover. Share. Grow.</footer>
 
 <script>
-const menu=[
-["Home","home"],["Friends","friends"],["Reels & Videos","reels"],
-["Messenger","messenger"],["Groups","groups"],
-["Marketplace","marketplace"],["News & Discover","news"],
-["Live","live"],["Events","events"],["Pages","pages"],
-["Notifications","notifications"],["Saved","saved"],
-["Memories","memories"],["Creator Dashboard","creator"],
-["My Profile","profile"],["Settings","settings"]
-];
-
-let posts=JSON.parse(localStorage.getItem("cm_posts")||"[]");
-let friends=[],groups=[],products=[],events=[],pages=[],saved=[];
-let notifications=[];
-
-const leftMenu=document.getElementById("leftMenu");
-menu.forEach(([name,id])=>{
-let b=document.createElement("button");
-b.textContent="• "+name;
-b.onclick=()=>show(id);
-leftMenu.append(b);
-});
-
-function show(id){
-document.querySelectorAll(".screen").forEach(s=>s.classList.add("hidden"));
-document.getElementById(id).classList.remove("hidden");
-window.scrollTo({top:0,behavior:"smooth"});
+function editProfile(){
+ const oldName=document.getElementById('profileName').textContent;
+ const name=prompt('Enter your profile name:',oldName);
+ if(name && name.trim()){
+  document.getElementById('profileName').textContent=name.trim();
+  document.getElementById('postName').textContent=name.trim();
+  localStorage.setItem('cm_name',name.trim());
+ }
+ const bio=prompt('Write your profile bio:',document.getElementById('bio').textContent);
+ if(bio!==null){
+  document.getElementById('bio').textContent=bio;
+  localStorage.setItem('cm_bio',bio);
+ }
 }
-
-function publish(){
-let name=document.getElementById("postName").value.trim();
-let text=document.getElementById("postText").value.trim();
-let category=document.getElementById("postCategory").value;
-if(!name||!text){alert("Enter your name and post.");return;}
-posts.unshift({id:Date.now(),name,text,category,likes:0});
-localStorage.setItem("cm_posts",JSON.stringify(posts));
-document.getElementById("postText").value="";
-notify("Your post was published.");
-render();
+function publishPost(){
+ const input=document.getElementById('postInput');
+ if(!input.value.trim())return alert('Write something first!');
+ const post=document.createElement('article');
+ post.className='post';
+ const head=document.createElement('b');
+ head.textContent=document.getElementById('profileName').textContent;
+ const content=document.createElement('div');
+ content.className='postcontent';
+ content.textContent=input.value;
+ post.append(head,content);
+ const actions=document.createElement('div');
+ actions.className='postbuttons';
+ actions.innerHTML='<button onclick="likePost(this)">👍 Like</button><button onclick="commentPost()">💬 Comment</button><button onclick="sharePost()">↗ Share</button>';
+ post.append(actions);
+ document.getElementById('feed').prepend(post);
+ input.value='';
 }
-
-function render(){
-let feed=document.getElementById("feed");
-let q=document.getElementById("search").value.toLowerCase();
-feed.innerHTML="";
-posts.filter(p=>(p.name+" "+p.text+" "+p.category).toLowerCase().includes(q))
-.forEach(p=>{
-let card=document.createElement("article");
-card.className="post";
-
-let head=document.createElement("div");
-head.className="posthead";
-let av=document.createElement("span");
-av.className="avatar";
-av.textContent=p.name[0].toUpperCase();
-let name=document.createElement("strong");
-name.textContent=p.name;
-head.append(av,name);
-
-let category=document.createElement("p");
-category.className="meta";
-category.textContent="Public • "+p.category;
-
-let content=document.createElement("p");
-content.className="postbody";
-content.textContent=p.text;
-
-let actions=document.createElement("div");
-actions.className="postactions";
-
-let like=document.createElement("button");
-like.textContent="👍 Like "+p.likes;
-like.onclick=()=>{p.likes++;localStorage.setItem("cm_posts",JSON.stringify(posts));render();};
-
-let comment=document.createElement("button");
-comment.textContent="💬 Comment";
-comment.onclick=()=>{
-let c=prompt("Write a comment:");
-if(c)alert("Demo comment: "+c);
-};
-
-let share=document.createElement("button");
-share.textContent="↗ Share";
-share.onclick=()=>sharePost(p);
-
-let save=document.createElement("button");
-save.textContent="🔖 Save";
-save.onclick=()=>{saved.push(p);alert("Saved in this session.");};
-
-actions.append(like,comment,share,save);
-card.append(head,category,content,actions);
-feed.append(card);
-});
-document.getElementById("postCount").textContent=posts.length;
-document.getElementById("likeCount").textContent=posts.reduce((n,p)=>n+p.likes,0);
+function likePost(btn){
+ btn.textContent=btn.textContent.includes('Liked')?'👍 Like':'👍 Liked';
 }
-
-function searchPosts(){render();}
-
-function notify(text){
-notifications.unshift(text);
-let box=document.getElementById("notificationList");
-box.textContent=notifications.join(" • ");
+function commentPost(){
+ const c=prompt('Write your comment:');
+ if(c)alert('Comment added in this demo: '+c);
 }
-
-function sharePost(p){
-let text=p.name+": "+p.text;
-if(navigator.share)navigator.share({title:"CONNECT ME",text});
-else if(navigator.clipboard)navigator.clipboard.writeText(text).then(()=>alert("Copied!"));
-else alert(text);
+function sharePost(){
+ if(navigator.share){
+  navigator.share({title:'CONNECT ME',text:'Check out my CONNECT ME profile'});
+ }else{
+  alert('Copy your profile link from the browser address bar to share.');
+ }
 }
-
-function shareSite(){
-if(navigator.share)navigator.share({title:"CONNECT ME",url:location.href});
-else alert(location.href);
+function addStory(){alert('Story upload needs image storage and a backend.');}
+function addPhoto(){alert('Photo upload will be added with image storage.');}
+function changeCover(){alert('Cover photo upload needs image storage.');}
+if(localStorage.getItem('cm_name')){
+ document.getElementById('profileName').textContent=localStorage.getItem('cm_name');
+ document.getElementById('postName').textContent=localStorage.getItem('cm_name');
 }
-
-function addFriend(){
-let n=document.getElementById("friendName").value.trim();
-if(!n)return;
-friends.push(n);
-document.getElementById("friendList").textContent=friends.join(", ");
-document.getElementById("friendName").value="";
-}
-
-function createGroup(){
-let n=document.getElementById("groupName").value.trim();
-if(!n)return;
-groups.push(n);
-document.getElementById("groupList").textContent=groups.join(" • ");
-}
-
-function addProduct(){
-let n=document.getElementById("productName").value.trim();
-let p=document.getElementById("productPrice").value.trim();
-if(!n||!p)return;
-let d=document.createElement("div");
-d.className="item";
-d.textContent=n+" — "+p;
-document.getElementById("productList").append(d);
-}
-
-function addEvent(){
-let n=document.getElementById("eventName").value;
-let d=document.getElementById("eventDate").value;
-if(!n||!d)return;
-let e=document.createElement("div");
-e.className="item";
-e.textContent=n+" — "+d;
-document.getElementById("eventList").append(e);
-}
-
-function createPage(){
-let n=document.getElementById("pageName").value.trim();
-if(!n)return;
-let d=document.createElement("div");
-d.className="item";
-d.textContent="📢 "+n;
-document.getElementById("pageList").append(d);
-}
-
-function sendMessage(){
-let input=document.getElementById("chatInput");
-let text=input.value.trim();
-if(!text)return;
-let d=document.createElement("p");
-d.textContent="You: "+text;
-document.getElementById("chatMessages").append(d);
-input.value="";
-}
-
-function saveProfile(){
-let n=document.getElementById("profileName").value;
-let b=document.getElementById("bio").value;
-document.getElementById("accountName").textContent="👤 "+(n||"Guest User");
-document.getElementById("profileInfo").textContent=n+" — "+b;
-}
-
-function clearLocal(){
-if(confirm("Clear all locally stored posts?")){
-localStorage.removeItem("cm_posts");
-posts=[];
-render();
-alert("Local posts cleared.");
-}
-}
-
-render();
+if(localStorage.getItem('cm_bio'))document.getElementById('bio').textContent=localStorage.getItem('cm_bio');
 </script>
 </body>
 </html>

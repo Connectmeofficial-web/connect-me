@@ -3,127 +3,180 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#17132f">
 <title>Connect Me</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f3f1fa;color:#211b38;font-family:Arial,sans-serif}
-header{background:#17132f;color:white;padding:18px;position:sticky;top:0;z-index:5}
-.brand{font-size:25px;font-weight:800;color:#c3a4ff}
+body{margin:0;background:#f3f0fa;color:#211b38;font-family:Arial,sans-serif}
+header{background:#17132f;color:white;padding:20px}
+.brand{font-size:27px;font-weight:800;color:#c5a5ff}
 .brand span{color:white}
-nav{display:flex;justify-content:space-around;background:white;padding:13px;position:sticky;top:61px;z-index:4;box-shadow:0 2px 8px #ddd}
-nav a{color:#6651a0;text-decoration:none;font-weight:bold;font-size:13px}
-main{max-width:650px;margin:18px auto;padding:0 12px}
-.card{background:white;border-radius:16px;padding:16px;margin-bottom:15px;box-shadow:0 3px 14px #211b3810}
-h2{font-size:19px;margin:0 0 12px}
-input,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;font:inherit;margin:7px 0}
-textarea{resize:vertical}
-button{border:0;border-radius:10px;padding:11px 17px;background:#7044d8;color:white;font-weight:bold;cursor:pointer}
-button:active{opacity:.8}
-.secondary{background:#eee8fa;color:#5635a4}
-.post-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.avatar{width:42px;height:42px;border-radius:50%;background:#7044d8;color:white;display:grid;place-items:center;font-weight:bold}
-.muted{color:#888;font-size:12px}
-.actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.actions button{background:#f0ebfa;color:#5836a6}
-#feed p{line-height:1.5;white-space:pre-wrap}
-footer{text-align:center;padding:25px;color:#888;font-size:12px}
+main{max-width:550px;margin:25px auto;padding:0 15px}
+.card{background:white;padding:23px;border-radius:19px;margin-bottom:17px;box-shadow:0 4px 18px #211b3810}
+h2{margin-top:0}
+input{width:100%;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:10px;font-size:15px}
+button{background:#7044d8;color:white;border:0;padding:13px 18px;border-radius:10px;font-weight:bold;cursor:pointer}
+.full{width:100%;margin-top:12px}
+.switch{text-align:center;color:#7044d8;margin-top:18px;cursor:pointer}
+.muted{color:#888;font-size:13px}
+.hidden{display:none}
+nav{display:flex;justify-content:space-around;background:white;padding:15px}
+nav button{background:#eee8fa;color:#5635a4}
+.post{background:white;padding:18px;border-radius:15px;margin:14px 0}
+.avatar{background:#7044d8;color:white;border-radius:50%;padding:13px;display:inline-block;margin-right:9px}
+textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px}
+footer{text-align:center;color:#888;padding:25px}
 </style>
 </head>
 <body>
 <header>
-  <div class="brand">CONNECT <span>ME</span></div>
-  <small>Connect. Share. Inspire. Grow.</small>
+<div class="brand">CONNECT <span>ME</span></div>
+<small>Connect. Share. Inspire. Grow.</small>
 </header>
 
+<main>
+<section id="auth">
+<div class="card">
+<h2 id="formTitle">Welcome Back 💜</h2>
+<p class="muted" id="subtitle">Sign in to Connect Me</p>
+
+<div id="registerFields" class="hidden">
+<input id="fullName" placeholder="Your full name">
+</div>
+
+<input id="email" type="email" placeholder="Email address" autocomplete="email">
+<input id="password" type="password" placeholder="Password" autocomplete="current-password">
+
+<div id="confirmField" class="hidden">
+<input id="confirmPassword" type="password" placeholder="Confirm password">
+</div>
+
+<button class="full" id="submitBtn" onclick="demoLogin()">Login</button>
+
+<p class="switch" onclick="toggleForm()" id="switchText">
+New here? Create an account
+</p>
+<p class="muted">Demo interface only. Real account authentication will be connected in a later version.</p>
+</div>
+</section>
+
+<section id="app" class="hidden">
+<div class="card">
+<h2 id="welcome">Welcome!</h2>
+<p>You are viewing the Connect Me demo community. 💜</p>
+<button onclick="logout()">Logout</button>
+</div>
+
 <nav>
-  <a href="#home">Home</a>
-  <a href="#create">Create</a>
-  <a href="#profile">Profile</a>
+<button onclick="showSection('home')">Home</button>
+<button onclick="showSection('create')">Create</button>
+<button onclick="showSection('profile')">Profile</button>
 </nav>
 
-<main id="home">
-  <section class="card">
-    <h2>Welcome to Connect Me 💜</h2>
-    <p>Meet people, share your thoughts and build meaningful connections.</p>
-  </section>
+<div id="home">
+<div class="card">
+<h2>Community Feed</h2>
+<p>Connect with people and share positive moments.</p>
+</div>
+<div id="feed">
+<div class="post">
+<div><span class="avatar">CM</span><b>Connect Me</b></div>
+<p>Your social journey starts here! ✨</p>
+<button onclick="this.innerText='♥ Liked'">♡ Like</button>
+</div>
+</div>
+</div>
 
-  <section class="card" id="create">
-    <h2>Create a post</h2>
-    <textarea id="postText" rows="3" placeholder="What's on your mind?"></textarea>
-    <button onclick="addPost()">Publish Post</button>
-  </section>
+<div id="create" class="hidden card">
+<h2>Create a post</h2>
+<textarea id="postText" rows="4" placeholder="What's on your mind?"></textarea>
+<button class="full" onclick="publishPost()">Publish Post</button>
+</div>
 
-  <section id="feed">
-    <div class="card">
-      <div class="post-head">
-        <div class="avatar">CM</div>
-        <div><b>Connect Me</b><div class="muted">Welcome post · Demo</div></div>
-      </div>
-      <p>Your social journey starts here! Share something positive with the community. ✨</p>
-      <div class="actions">
-        <button onclick="likePost(this)">♡ Like</button>
-        <button onclick="alert('Comments will be added in a future version.')">Comment</button>
-        <button onclick="sharePost()">Share</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="card" id="profile">
-    <h2>My Profile</h2>
-    <div class="post-head">
-      <div class="avatar">Y</div>
-      <div><b>Your Name</b><div class="muted">New Connect Me member</div></div>
-    </div>
-    <p>Welcome to your new social community.</p>
-  </section>
+<div id="profile" class="hidden card">
+<h2>My Profile</h2>
+<p id="profileName"></p>
+<p id="profileEmail" class="muted"></p>
+<p>Welcome to your Connect Me community.</p>
+</div>
+</section>
 </main>
 
-<footer>© 2026 Connect Me · Connect. Share. Inspire. Grow.</footer>
+<footer>© 2026 CONNECT ME · Connect. Share. Inspire. Grow.</footer>
 
 <script>
-function addPost(){
-  const field=document.getElementById('postText');
-  const value=field.value.trim();
-  if(!value){alert('Please write something first.');return;}
-  const card=document.createElement('div');
-  card.className='card';
-  const head=document.createElement('div');
-  head.className='post-head';
-  const avatar=document.createElement('div');
-  avatar.className='avatar';
-  avatar.textContent='Y';
-  const name=document.createElement('b');
-  name.textContent='You';
-  head.append(avatar,name);
-  const content=document.createElement('p');
-  content.textContent=value;
-  const actions=document.createElement('div');
-  actions.className='actions';
-  const like=document.createElement('button');
-  like.textContent='♡ Like';
-  like.onclick=function(){likePost(like)};
-  actions.append(like);
-  card.append(head,content,actions);
-  document.getElementById('feed').prepend(card);
-  field.value='';
+let registerMode=false;
+let currentUser=null;
+
+function toggleForm(){
+registerMode=!registerMode;
+document.getElementById('registerFields').classList.toggle('hidden',!registerMode);
+document.getElementById('confirmField').classList.toggle('hidden',!registerMode);
+document.getElementById('formTitle').innerText=registerMode?'Create Your Account 💜':'Welcome Back 💜';
+document.getElementById('subtitle').innerText=registerMode?'Join the Connect Me community':'Sign in to Connect Me';
+document.getElementById('submitBtn').innerText=registerMode?'Create Account':'Login';
+document.getElementById('switchText').innerText=registerMode?'Already registered? Login':'New here? Create an account';
+document.getElementById('password').autocomplete=registerMode?'new-password':'current-password';
 }
-function likePost(button){
-  if(button.dataset.liked==='yes'){
-    button.dataset.liked='no';
-    button.textContent='♡ Like';
-  }else{
-    button.dataset.liked='yes';
-    button.textContent='♥ Liked';
-  }
+
+function demoLogin(){
+const email=document.getElementById('email').value.trim();
+const password=document.getElementById('password').value;
+if(!email||!password){alert('Please enter your email and password.');return;}
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Enter a valid email address.');return;}
+
+let name='Connect Me Member';
+if(registerMode){
+name=document.getElementById('fullName').value.trim();
+const confirm=document.getElementById('confirmPassword').value;
+if(!name){alert('Please enter your name.');return;}
+if(password.length<8){alert('For a real account, use at least 8 characters.');return;}
+if(password!==confirm){alert('Passwords do not match.');return;}
 }
-function sharePost(){
-  if(navigator.share){
-    navigator.share({title:'Connect Me',text:'Join Connect Me!'});
-  }else{
-    alert('Connect Me is ready to share!');
-  }
+currentUser={name,email};
+document.getElementById('auth').classList.add('hidden');
+document.getElementById('app').classList.remove('hidden');
+document.getElementById('welcome').innerText='Welcome, '+name+'! 💜';
+document.getElementById('profileName').innerText='Name: '+name;
+document.getElementById('profileEmail').innerText='Email: '+email;
+showSection('home');
+}
+
+function logout(){
+currentUser=null;
+document.getElementById('app').classList.add('hidden');
+document.getElementById('auth').classList.remove('hidden');
+document.getElementById('email').value='';
+document.getElementById('password').value='';
+document.getElementById('fullName').value='';
+document.getElementById('confirmPassword').value='';
+if(registerMode)toggleForm();
+}
+
+function showSection(section){
+['home','create','profile'].forEach(id=>{
+document.getElementById(id).classList.toggle('hidden',id!==section);
+});
+}
+
+function publishPost(){
+const field=document.getElementById('postText');
+const value=field.value.trim();
+if(!value){alert('Write something first.');return;}
+const post=document.createElement('div');
+post.className='post';
+const title=document.createElement('b');
+title.textContent=currentUser.name;
+const content=document.createElement('p');
+content.textContent=value;
+const like=document.createElement('button');
+like.textContent='♡ Like';
+like.onclick=()=>like.textContent='♥ Liked';
+post.append(title,content,like);
+document.getElementById('feed').prepend(post);
+field.value='';
+showSection('home');
 }
 </script>
 </body>

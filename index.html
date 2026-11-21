@@ -3,26 +3,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CONNECT ME</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONNECT ME - Social Network</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f0f2f5;font-family:Arial,sans-serif;color:#202124}
+body{margin:0;background:#f0f2f5;font-family:Arial;color:#202124}
 header{background:#0866ff;color:white;padding:15px;position:sticky;top:0;z-index:10}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.logo{font-size:25px;font-weight:bold}
-.search{padding:10px;border:0;border-radius:20px;width:45%;max-width:300px}
-nav{display:flex;justify-content:space-around;background:white;padding:13px;position:sticky;top:55px;z-index:9}
-nav a{color:#0866ff;text-decoration:none;font-weight:bold}
-main{max-width:650px;margin:15px auto;padding:10px}
-.card{background:white;padding:16px;border-radius:12px;margin-bottom:15px}
-input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:7px 0}
-button{background:#0866ff;color:white;border:0;padding:11px 15px;border-radius:8px;cursor:pointer}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-size:24px;font-weight:bold}
+.search{width:48%;padding:11px;border:0;border-radius:22px}
+nav{display:flex;overflow-x:auto;gap:9px;padding:12px;background:white;position:sticky;top:55px;z-index:9}
+nav button{white-space:nowrap}
+button{border:0;border-radius:8px;background:#0866ff;color:white;padding:11px;cursor:pointer}
+main{max-width:680px;margin:auto;padding:12px}
+.card,.post{background:white;padding:16px;border-radius:13px;margin-bottom:14px}
+h2,h3{margin-top:5px}
+input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin:6px 0}
+video{width:100%;border-radius:10px;background:#111}
+.feature{background:linear-gradient(120deg,#0866ff,#6b39c9);color:white;padding:22px;border-radius:14px;margin-bottom:15px}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.categories button{background:#e8f0ff;color:#0866ff}
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.post{background:white;border-radius:12px;padding:16px;margin-bottom:15px;overflow-wrap:anywhere}
-.post h3{margin:0 0 8px}
-.post img,.post video{width:100%;border-radius:10px;margin-top:10px}
-.small{color:#777;font-size:12px}
+.actions button{background:#edf2ff;color:#0866ff}
+.meta{font-size:12px;color:#777}
+.story{border-left:4px solid #0866ff;padding:10px;margin:10px 0;background:#f7f9ff}
+a{color:#0866ff}
 footer{text-align:center;padding:25px;color:#777}
 </style>
 </head>
@@ -30,129 +35,208 @@ footer{text-align:center;padding:25px;color:#777}
 
 <header>
 <div class="top">
-<div class="logo">CONNECT ME</div>
-<input class="search" id="search" placeholder="Search people or posts"
-oninput="showPosts()">
+<div class="logo">CONNECT ME 🌍</div>
+<input class="search" id="search" placeholder="Search posts..." oninput="render()">
 </div>
 </header>
 
 <nav>
-<a href="#home">Home</a>
-<a href="#discover">Discover</a>
-<a href="#news">News</a>
-<a href="#videos">Videos</a>
+<button onclick="filter('All')">🏠 Home</button>
+<button onclick="filter('News')">📰 News</button>
+<button onclick="filter('Funny')">😂 Funny</button>
+<button onclick="filter('Romantic')">❤️ Romantic</button>
+<button onclick="filter('Music')">🎵 Music</button>
+<button onclick="filter('Sports')">⚽ Sports</button>
+<button onclick="filter('Education')">📚 Education</button>
 </nav>
 
-<main id="home">
+<main>
 
-<div class="card">
-<h2>Welcome to CONNECT ME 🌍</h2>
+<div class="feature">
+<h1>Welcome to CONNECT ME</h1>
 <p>Connect. Discover. Share. Grow.</p>
-<p>Discover people, ideas, news and entertainment.</p>
+<p>Your world, your community, your stories.</p>
 <button onclick="shareSite()">Share CONNECT ME</button>
 </div>
 
 <div class="card">
-<h3>Create a public post</h3>
-<input id="author" placeholder="Your name">
-<textarea id="message" rows="4" placeholder="What's happening? Share your thoughts..."></textarea>
-<button onclick="publishPost()">Publish Post</button>
-<p class="small">Please share respectful and lawful content.</p>
+<h3>🔥 Discover Everything</h3>
+<div class="categories">
+<button onclick="filter('News')">📰 News</button>
+<button onclick="filter('Funny')">😂 Funny</button>
+<button onclick="filter('Romantic')">❤️ Romance</button>
+<button onclick="filter('Music')">🎵 Music</button>
+<button onclick="filter('Sports')">⚽ Sports</button>
+<button onclick="filter('Education')">📚 Learning</button>
 </div>
-
-<h3 id="discover">Discover Public Posts</h3>
-<div id="feed"></div>
-
-<div class="card" id="news">
-<h3>📰 News & Public Interest</h3>
-<p>Discover important stories, community updates and information.</p>
-<a href="https://news.google.com/" target="_blank">Explore Google News ↗</a>
-</div>
-
-<div class="card" id="videos">
-<h3>🎬 Videos & Entertainment</h3>
-<p>Explore videos and entertainment from around the world.</p>
-<a href="https://www.youtube.com/" target="_blank">Explore YouTube ↗</a>
 </div>
 
 <div class="card">
-<h3>👥 Community</h3>
-<p>Connect with people and discover new communities.</p>
+<h3>🎬 Featured Video</h3>
+<p id="featuredTitle">Watch a video demo</p>
+<video controls autoplay muted loop playsinline>
+<source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+</video>
+<p class="meta">Demo video. Replace with videos you own or have permission to share.</p>
+</div>
+
+<div class="card">
+<h3>🌐 Discover Videos</h3>
+<div id="videoLinks"></div>
+</div>
+
+<div class="card">
+<h3>✍️ Create a Post</h3>
+<input id="username" placeholder="Your name">
+<textarea id="postText" rows="3" placeholder="What's happening?"></textarea>
+<select id="category" style="width:100%;padding:12px;border-radius:8px">
+<option>News</option>
+<option>Funny</option>
+<option>Romantic</option>
+<option>Music</option>
+<option>Sports</option>
+<option>Education</option>
+<option>General</option>
+</select>
+<button style="width:100%;margin-top:8px" onclick="addPost()">Publish Post</button>
+</div>
+
+<h3>✨ Your Discovery Feed</h3>
+<div id="feed"></div>
+
+<div class="card">
+<h3>📰 Explore Latest News</h3>
+<div class="story">
+<a href="https://news.google.com/" target="_blank">Explore latest world news ↗</a>
+</div>
+<div class="story">
+<a href="https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZ4ZERBU0FtVnVLQUFQAQ" target="_blank">Explore India news ↗</a>
+</div>
 </div>
 
 </main>
 
 <footer>
-<strong>CONNECT ME</strong><br>
-Connect • Discover • Share • Grow<br>
+<strong>CONNECT ME</strong>
+<p>Connect • Discover • Share • Grow</p>
 © 2026 CONNECT ME
 </footer>
 
 <script>
-let posts=JSON.parse(localStorage.getItem("connectme_posts")||"[]");
+let current="All";
 
-function showPosts(){
-const feed=document.getElementById("feed");
-const query=document.getElementById("search").value.toLowerCase();
+let posts=[
+{name:"CONNECT ME",category:"News",text:"Welcome to our new social discovery community!"},
+{name:"Entertainment",category:"Funny",text:"Discover funny entertainment and comedy videos."},
+{name:"Love & Life",category:"Romantic",text:"Explore romantic stories, music and beautiful moments."},
+{name:"Learning Hub",category:"Education",text:"Discover knowledge, education and new ideas."},
+{name:"Sports World",category:"Sports",text:"Follow sports stories and exciting updates."}
+];
+
+let saved=JSON.parse(localStorage.getItem("cm_posts")||"[]");
+posts=[...saved,...posts];
+
+function filter(category){
+current=category;
+render();
+}
+
+function render(){
+let feed=document.getElementById("feed");
+let query=document.getElementById("search").value.toLowerCase();
 feed.innerHTML="";
-posts.filter(p=>(p.name+" "+p.text).toLowerCase().includes(query))
-.forEach(p=>{
-const div=document.createElement("div");
-div.className="post";
-const title=document.createElement("h3");
-title.textContent=p.name;
-const content=document.createElement("p");
-content.textContent=p.text;
-const date=document.createElement("div");
-date.className="small";
-date.textContent=p.date;
-const actions=document.createElement("div");
+
+posts.filter(p=>
+(current==="All"||p.category===current) &&
+(p.name+" "+p.text).toLowerCase().includes(query)
+).forEach((p)=>{
+let card=document.createElement("div");
+card.className="post";
+
+let name=document.createElement("h3");
+name.textContent="👤 "+p.name;
+
+let category=document.createElement("div");
+category.className="meta";
+category.textContent="Category: "+p.category;
+
+let text=document.createElement("p");
+text.textContent=p.text;
+
+let actions=document.createElement("div");
 actions.className="actions";
-const share=document.createElement("button");
-share.textContent="Share";
+
+let like=document.createElement("button");
+like.textContent="👍 Like";
+like.onclick=()=>{like.textContent="❤️ Liked";};
+
+let share=document.createElement("button");
+share.textContent="↗ Share";
 share.onclick=()=>sharePost(p);
-actions.append(title,content,date,share);
-div.append(actions);
-feed.appendChild(div);
+
+actions.append(like,share);
+card.append(name,category,text,actions);
+feed.append(card);
 });
 }
 
-function publishPost(){
-const name=document.getElementById("author").value.trim();
-const message=document.getElementById("message").value.trim();
-if(!name||!message){
-alert("Please enter your name and post.");
+function addPost(){
+let name=document.getElementById("username").value.trim();
+let text=document.getElementById("postText").value.trim();
+let category=document.getElementById("category").value;
+
+if(!name||!text){
+alert("Enter your name and post.");
 return;
 }
-posts.unshift({
-name:name,
-text:message,
-date:new Date().toLocaleString()
-});
-localStorage.setItem("connectme_posts",JSON.stringify(posts));
-document.getElementById("message").value="";
-showPosts();
+
+let post={name,category,text};
+posts.unshift(post);
+saved.unshift(post);
+localStorage.setItem("cm_posts",JSON.stringify(saved));
+document.getElementById("postText").value="";
+render();
 }
 
 function sharePost(post){
-const text=post.name+": "+post.text;
+let text=post.name+": "+post.text;
 if(navigator.share){
-navigator.share({title:"CONNECT ME",text:text});
-}else if(navigator.clipboard){
-navigator.clipboard.writeText(text).then(()=>alert("Post copied!"));
+navigator.share({title:"CONNECT ME",text});
 }else{
-alert(text);
+navigator.clipboard.writeText(text).then(()=>alert("Copied!"));
 }
 }
 
 function shareSite(){
 if(navigator.share){
-navigator.share({title:"CONNECT ME",text:"Join CONNECT ME – Connect, Discover, Share and Grow!",url:location.href});
+navigator.share({title:"CONNECT ME",text:"Join CONNECT ME!",url:location.href});
 }else{
-alert("Website address: "+location.href);
+alert("Website: "+location.href);
 }
 }
-showPosts();
+
+let topics=[
+["Funny Videos","https://www.youtube.com/results?search_query=funny+videos"],
+["Romantic Videos","https://www.youtube.com/results?search_query=romantic+videos"],
+["Music Videos","https://www.youtube.com/results?search_query=music+videos"],
+["News Videos","https://www.youtube.com/results?search_query=latest+news"],
+["Sports Videos","https://www.youtube.com/results?search_query=sports+highlights"],
+["Educational Videos","https://www.youtube.com/results?search_query=educational+videos"]
+];
+
+let links=document.getElementById("videoLinks");
+topics.forEach(t=>{
+let p=document.createElement("p");
+let a=document.createElement("a");
+a.href=t[1];
+a.target="_blank";
+a.rel="noopener";
+a.textContent="▶ "+t[0]+" - Watch";
+p.append(a);
+links.append(p);
+});
+
+render();
 </script>
 </body>
 </html>

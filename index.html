@@ -7,38 +7,152 @@
 <title>CONNECT ME</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f0f2f5}
-header{background:#0866ff;color:white;padding:18px;font-size:25px;font-weight:bold}
-main{max-width:650px;margin:20px auto;padding:12px}
-.card{background:white;padding:18px;border-radius:12px;margin-bottom:15px}
-input,button{width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
-button{background:#0866ff;color:white;border:0;font-weight:bold}
-.post{padding:15px;background:#fff;border-radius:10px;margin-top:12px}
+body{margin:0;background:#f0f2f5;font-family:Arial,sans-serif;color:#202124}
+header{background:#0866ff;color:white;padding:15px;position:sticky;top:0;z-index:10}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-size:25px;font-weight:bold}
+.search{padding:10px;border:0;border-radius:20px;width:45%;max-width:300px}
+nav{display:flex;justify-content:space-around;background:white;padding:13px;position:sticky;top:55px;z-index:9}
+nav a{color:#0866ff;text-decoration:none;font-weight:bold}
+main{max-width:650px;margin:15px auto;padding:10px}
+.card{background:white;padding:16px;border-radius:12px;margin-bottom:15px}
+input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:7px 0}
+button{background:#0866ff;color:white;border:0;padding:11px 15px;border-radius:8px;cursor:pointer}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.post{background:white;border-radius:12px;padding:16px;margin-bottom:15px;overflow-wrap:anywhere}
+.post h3{margin:0 0 8px}
+.post img,.post video{width:100%;border-radius:10px;margin-top:10px}
+.small{color:#777;font-size:12px}
+footer{text-align:center;padding:25px;color:#777}
 </style>
 </head>
 <body>
-<header>CONNECT ME</header>
-<main>
-<div class="card">
-<h2>Welcome to CONNECT ME</h2>
-<p>Connect. Discover. Share.</p>
-<input id="postInput" placeholder="What's on your mind?">
-<button onclick="addPost()">Publish Post</button>
+
+<header>
+<div class="top">
+<div class="logo">CONNECT ME</div>
+<input class="search" id="search" placeholder="Search people or posts"
+oninput="showPosts()">
 </div>
-<h3>Discover Posts</h3>
-<div id="posts"></div>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#discover">Discover</a>
+<a href="#news">News</a>
+<a href="#videos">Videos</a>
+</nav>
+
+<main id="home">
+
+<div class="card">
+<h2>Welcome to CONNECT ME 🌍</h2>
+<p>Connect. Discover. Share. Grow.</p>
+<p>Discover people, ideas, news and entertainment.</p>
+<button onclick="shareSite()">Share CONNECT ME</button>
+</div>
+
+<div class="card">
+<h3>Create a public post</h3>
+<input id="author" placeholder="Your name">
+<textarea id="message" rows="4" placeholder="What's happening? Share your thoughts..."></textarea>
+<button onclick="publishPost()">Publish Post</button>
+<p class="small">Please share respectful and lawful content.</p>
+</div>
+
+<h3 id="discover">Discover Public Posts</h3>
+<div id="feed"></div>
+
+<div class="card" id="news">
+<h3>📰 News & Public Interest</h3>
+<p>Discover important stories, community updates and information.</p>
+<a href="https://news.google.com/" target="_blank">Explore Google News ↗</a>
+</div>
+
+<div class="card" id="videos">
+<h3>🎬 Videos & Entertainment</h3>
+<p>Explore videos and entertainment from around the world.</p>
+<a href="https://www.youtube.com/" target="_blank">Explore YouTube ↗</a>
+</div>
+
+<div class="card">
+<h3>👥 Community</h3>
+<p>Connect with people and discover new communities.</p>
+</div>
+
 </main>
+
+<footer>
+<strong>CONNECT ME</strong><br>
+Connect • Discover • Share • Grow<br>
+© 2026 CONNECT ME
+</footer>
+
 <script>
-function addPost(){
-const input=document.getElementById("postInput");
-const value=input.value.trim();
-if(!value){alert("Write something first!");return;}
-const post=document.createElement("div");
-post.className="post";
-post.textContent=value;
-document.getElementById("posts").prepend(post);
-input.value="";
+let posts=JSON.parse(localStorage.getItem("connectme_posts")||"[]");
+
+function showPosts(){
+const feed=document.getElementById("feed");
+const query=document.getElementById("search").value.toLowerCase();
+feed.innerHTML="";
+posts.filter(p=>(p.name+" "+p.text).toLowerCase().includes(query))
+.forEach(p=>{
+const div=document.createElement("div");
+div.className="post";
+const title=document.createElement("h3");
+title.textContent=p.name;
+const content=document.createElement("p");
+content.textContent=p.text;
+const date=document.createElement("div");
+date.className="small";
+date.textContent=p.date;
+const actions=document.createElement("div");
+actions.className="actions";
+const share=document.createElement("button");
+share.textContent="Share";
+share.onclick=()=>sharePost(p);
+actions.append(title,content,date,share);
+div.append(actions);
+feed.appendChild(div);
+});
 }
+
+function publishPost(){
+const name=document.getElementById("author").value.trim();
+const message=document.getElementById("message").value.trim();
+if(!name||!message){
+alert("Please enter your name and post.");
+return;
+}
+posts.unshift({
+name:name,
+text:message,
+date:new Date().toLocaleString()
+});
+localStorage.setItem("connectme_posts",JSON.stringify(posts));
+document.getElementById("message").value="";
+showPosts();
+}
+
+function sharePost(post){
+const text=post.name+": "+post.text;
+if(navigator.share){
+navigator.share({title:"CONNECT ME",text:text});
+}else if(navigator.clipboard){
+navigator.clipboard.writeText(text).then(()=>alert("Post copied!"));
+}else{
+alert(text);
+}
+}
+
+function shareSite(){
+if(navigator.share){
+navigator.share({title:"CONNECT ME",text:"Join CONNECT ME – Connect, Discover, Share and Grow!",url:location.href});
+}else{
+alert("Website address: "+location.href);
+}
+}
+showPosts();
 </script>
 </body>
 </html>

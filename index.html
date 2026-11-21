@@ -4,641 +4,596 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#17132f">
-<title>CONNECT ME - Social Network</title>
+<meta name="theme-color" content="#0866ff">
+<title>CONNECT ME</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f0eff6;color:#242137;font-family:Arial,sans-serif}
-button{cursor:pointer;font-weight:600;border:0}
-.hidden{display:none!important}
-header{background:#17132f;color:white;padding:15px;position:sticky;top:0;z-index:20}
-.header-row{max-width:850px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.brand{font-size:27px;font-weight:900;color:#c7a5ff}
-.brand span{color:white}
-.header-actions{display:flex;gap:8px}
-.circle{width:39px;height:39px;border-radius:50%;background:#342b50;color:white;font-size:20px}
-nav{display:flex;justify-content:space-around;background:white;padding:13px 2px;position:sticky;top:69px;z-index:15;box-shadow:0 2px 5px #0001}
-nav button{background:white;color:#625b70;font-size:20px;padding:6px}
-nav button.active{color:#7044d8;border-bottom:3px solid #7044d8}
-main{max-width:720px;margin:auto;padding:8px 12px}
-.card{background:white;padding:17px;border-radius:16px;margin:12px 0;box-shadow:0 3px 15px #211b3808}
-.row{display:flex;align-items:center;gap:11px}
-.avatar{height:45px;width:45px;flex-shrink:0;border-radius:50%;background:#7044d8;color:white;display:grid;place-items:center;font-size:18px;font-weight:bold}
-.muted{color:#888;font-size:13px}
-.primary{background:#7044d8;color:white;padding:13px 19px;border-radius:10px}
-.secondary{background:#eeeaf7;color:#51358b;padding:12px;border-radius:10px}
-.full{width:100%;margin-top:10px}
-input,textarea,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;margin:7px 0;font-size:15px;background:white}
-textarea{resize:vertical}
-label{display:flex;align-items:center;gap:10px;margin:14px 0}
-label input{width:auto;margin:0;accent-color:#7044d8}
-hr{border:0;border-top:1px solid #eee;margin:18px 0}
-#auth{max-width:440px;margin:35px auto;padding:12px}
-#auth .card{padding:25px}
-#auth h2{color:#7044d8}
-.switch{text-align:center;color:#7044d8;cursor:pointer;margin-top:18px}
-.stories{display:flex;gap:10px;overflow-x:auto;padding:10px 0}
-.story{min-width:110px;height:165px;border-radius:13px;background:linear-gradient(145deg,#7044d8,#25153e);color:white;padding:12px;display:flex;flex-direction:column;justify-content:space-between;font-size:13px}
-.story:first-child{background:linear-gradient(145deg,#e8ddff,#c4a6ff);color:#30204c}
-.story button{border-radius:50%;height:35px;width:35px;background:#7044d8;color:white;font-size:23px}
-.composer{background:#f1eff7;border-radius:30px;padding:14px;color:#777;flex:1}
-.post{background:white;padding:17px;border-radius:15px;margin:12px 0}
-.post-text{line-height:1.6;white-space:pre-wrap}
-.post-image{width:100%;max-height:450px;object-fit:contain;border-radius:10px;margin-top:10px}
-.post-actions{display:flex;justify-content:space-around;border-top:1px solid #eee;margin-top:13px;padding-top:13px}
-.post-actions button{background:white;color:#66527e}
-.online{height:11px;width:11px;background:#22ad63;border:2px solid white;border-radius:50%;display:inline-block}
-.offline{height:11px;width:11px;background:#999;border:2px solid white;border-radius:50%;display:inline-block}
-.chat-item{background:#f3f0fa;padding:12px;border-radius:12px;margin:10px 0;overflow-wrap:anywhere}
-.message-mine{text-align:right;background:#e8ddff;padding:12px;border-radius:13px;margin:10px 0;margin-left:18%}
-.message-other{text-align:left;background:#f0eff5;padding:12px;border-radius:13px;margin:10px 18% 10px 0}
-.settings-item{padding:12px 0}
-footer{text-align:center;padding:25px;color:#888;font-size:13px}
-@media(min-width:600px){main{padding:12px 20px}}
+:root {
+  --blue:#0866ff;
+  --bg:#f0f2f5;
+  --white:#ffffff;
+  --text:#18202a;
+  --muted:#65676b;
+  --line:#e4e6eb;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+button,input,textarea { font:inherit; }
+button { cursor:pointer; }
+.topbar {
+  height:60px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 1px 4px #0001;
+}
+.brand {
+  color:var(--blue);
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
+.search {
+  border:0;
+  border-radius:22px;
+  background:#f0f2f5;
+  padding:11px 16px;
+  width:min(300px,35vw);
+  outline:none;
+}
+.top-actions { display:flex; gap:9px; }
+.circle {
+  width:40px;height:40px;
+  border:0;border-radius:50%;
+  background:#e4e6eb;
+  font-size:19px;
+}
+.layout {
+  max-width:1250px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:230px minmax(0,650px) 260px;
+  gap:22px;
+  padding:20px 14px;
+}
+.sidebar,.rightbar {
+  position:sticky;
+  top:80px;
+  align-self:start;
+}
+.side-item {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:13px 10px;
+  border-radius:9px;
+  font-weight:600;
+  cursor:pointer;
+}
+.side-item:hover { background:#e4e6eb; }
+.side-icon { font-size:21px;width:27px;text-align:center; }
+.panel {
+  background:white;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:16px;
+  box-shadow:0 1px 2px #0001;
+}
+.section-title { font-size:19px;font-weight:750;margin:0 0 14px; }
+.story-list {
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding-bottom:3px;
+}
+.story {
+  min-width:105px;
+  height:165px;
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(145deg,#6a9dfb,#173b8f);
+  color:white;
+  display:flex;
+  align-items:flex-end;
+  padding:10px;
+  font-size:13px;
+  font-weight:bold;
+}
+.story:nth-child(2) { background:linear-gradient(145deg,#f2a36d,#8c3155); }
+.story:nth-child(3) { background:linear-gradient(145deg,#60b9a4,#14534c); }
+.story:nth-child(4) { background:linear-gradient(145deg,#b38bf0,#542c8a); }
+.story-add {
+  position:absolute;
+  top:10px;left:10px;
+  background:white;color:var(--blue);
+  width:30px;height:30px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  font-size:23px;
+}
+.avatar {
+  width:42px;height:42px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:#dce8ff;
+  color:#1455bd;
+  display:grid;
+  place-items:center;
+  font-weight:bold;
+}
+.create-row { display:flex;gap:10px;align-items:center; }
+.create-input {
+  flex:1;
+  border:0;
+  background:#f0f2f5;
+  border-radius:24px;
+  padding:13px 17px;
+  outline:none;
+}
+.action-row {
+  display:flex;
+  justify-content:space-around;
+  border-top:1px solid var(--line);
+  margin-top:14px;
+  padding-top:10px;
+  gap:5px;
+}
+.action {
+  border:0;background:white;
+  padding:9px 5px;
+  color:#606770;
+  font-weight:600;
+  border-radius:7px;
+  flex:1;
+}
+.action:hover { background:#f0f2f5; }
+.post-head {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.post-name { font-weight:700; }
+.post-time { color:var(--muted);font-size:12px;margin-top:4px; }
+.post-text { line-height:1.5;margin:14px 0;white-space:pre-wrap; }
+.post-image {
+  width:100%;
+  max-height:420px;
+  object-fit:cover;
+  border-radius:8px;
+}
+.post-stats {
+  display:flex;justify-content:space-between;
+  color:var(--muted);font-size:13px;
+  padding:12px 2px;
+  border-bottom:1px solid var(--line);
+}
+.post-actions { display:flex;gap:5px;margin-top:5px; }
+.post-actions button {
+  flex:1;border:0;background:white;
+  padding:10px 3px;border-radius:7px;
+  color:#606770;font-weight:600;
+}
+.post-actions button:hover { background:#f0f2f5; }
+.liked { color:var(--blue)!important; }
+.contact { display:flex;align-items:center;gap:10px;padding:10px 0; }
+.online-dot {
+  width:10px;height:10px;border-radius:50%;
+  background:#31a24c;border:2px solid white;
+  margin-left:-17px;margin-top:25px;
+}
+.muted { color:var(--muted);font-size:13px; }
+.modal-bg {
+  display:none;position:fixed;inset:0;
+  background:#0008;z-index:30;
+  align-items:center;justify-content:center;
+  padding:15px;
+}
+.modal {
+  background:white;border-radius:13px;
+  width:100%;max-width:500px;padding:20px;
+}
+.modal textarea {
+  width:100%;min-height:120px;
+  border:0;background:#f0f2f5;
+  padding:13px;border-radius:9px;
+  resize:vertical;outline:none;
+  margin:15px 0;
+}
+.primary {
+  background:var(--blue);color:white;
+  border:0;border-radius:8px;
+  padding:11px 18px;font-weight:bold;
+}
+.full { width:100%; }
+.page { display:none; }
+.page.active { display:block; }
+.mobile-nav {
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  background:white;border-top:1px solid var(--line);
+  justify-content:space-around;padding:9px 2px;
+  z-index:15;
+}
+.mobile-nav button {
+  border:0;background:white;font-size:21px;
+  color:#606770;padding:5px 10px;
+}
+.mobile-nav button.active { color:var(--blue); }
+.empty { text-align:center;padding:35px 10px;color:var(--muted); }
+.comment-box {
+  width:100%;border:0;background:#f0f2f5;
+  padding:11px 14px;border-radius:20px;outline:none;
+}
+@media(max-width:950px) {
+  .layout { grid-template-columns:190px minmax(0,650px); }
+  .rightbar { display:none; }
+}
+@media(max-width:650px) {
+  .topbar { padding:0 12px;height:56px; }
+  .brand { font-size:22px; }
+  .search { width:34vw;padding:10px; }
+  .layout { display:block;padding:12px 8px 75px; }
+  .sidebar,.rightbar { display:none; }
+  .mobile-nav { display:flex; }
+  .panel { border-radius:10px;margin-bottom:12px; }
+  .story { min-width:95px;height:145px; }
+}
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="header-row">
-<div>
-<div class="brand">CONNECT <span>ME</span></div>
-<small>Connect. Share. Inspire. Grow.</small>
-</div>
-<div class="header-actions">
-<button class="circle" onclick="showPage('create')">＋</button>
-<button class="circle" onclick="showPage('messages')">✉</button>
-<button class="circle" onclick="showPage('settings')">⚙</button>
-</div>
-</div>
+<header class="topbar">
+  <div class="brand">CONNECT ME</div>
+  <input class="search" id="searchInput" placeholder="Search Connect Me..." oninput="searchPosts()">
+  <div class="top-actions">
+    <button class="circle" onclick="showPage('messages')" title="Messages">💬</button>
+    <button class="circle" onclick="showPage('notifications')" title="Notifications">🔔</button>
+  </div>
 </header>
 
-<!-- LOGIN AND REGISTRATION -->
+<div class="layout">
 
-<section id="auth">
-<div class="card">
-<h2 id="authTitle">Welcome to CONNECT ME 💜</h2>
-<p class="muted">Connect with friends. Share your moments.</p>
+  <aside class="sidebar">
+    <div class="side-item" onclick="showPage('profile')">
+      <div class="avatar">CM</div> My Profile
+    </div>
+    <div class="side-item" onclick="showPage('home')"><span class="side-icon">🏠</span> Home</div>
+    <div class="side-item" onclick="showPage('friends')"><span class="side-icon">👥</span> Friends</div>
+    <div class="side-item" onclick="showPage('messages')"><span class="side-icon">💬</span> Messages</div>
+    <div class="side-item" onclick="showPage('notifications')"><span class="side-icon">🔔</span> Notifications</div>
+    <div class="side-item" onclick="showPage('saved')"><span class="side-icon">🔖</span> Saved Posts</div>
+    <div class="side-item" onclick="showPage('settings')"><span class="side-icon">⚙️</span> Settings</div>
+    <hr style="border:0;border-top:1px solid #ddd">
+    <p class="muted">Your social world, connected.</p>
+  </aside>
 
-<div id="registerFields" class="hidden">
-<input id="fullName" placeholder="Full name">
+  <main>
+
+    <section class="page active" id="home">
+
+      <div class="panel">
+        <h3 class="section-title">Stories</h3>
+        <div class="story-list">
+          <div class="story" onclick="alert('Story creation will be added with backend support.')">
+            <span class="story-add">+</span>
+            Create Story
+          </div>
+          <div class="story">Your friends</div>
+          <div class="story">Discover people</div>
+          <div class="story">Connect today</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="create-row">
+          <div class="avatar">CM</div>
+          <input class="create-input" placeholder="What's on your mind?" onclick="openComposer()">
+        </div>
+        <div class="action-row">
+          <button class="action" onclick="openComposer()">📷 Photo</button>
+          <button class="action" onclick="openComposer()">😊 Feeling</button>
+          <button class="action" onclick="openComposer()">✍️ Write</button>
+        </div>
+      </div>
+
+      <div id="feed"></div>
+    </section>
+
+    <section class="page" id="profile">
+      <div class="panel" style="text-align:center">
+        <div style="height:120px;background:linear-gradient(120deg,#0866ff,#7daeff);border-radius:9px"></div>
+        <div class="avatar" style="width:85px;height:85px;margin:-42px auto 10px;border:4px solid white;font-size:25px">CM</div>
+        <h2 id="profileName">Connect Me User</h2>
+        <p class="muted">Welcome to CONNECT ME</p>
+        <button class="primary" onclick="editProfile()">Edit Profile</button>
+      </div>
+      <div class="panel">
+        <h3 class="section-title">Your Posts</h3>
+        <div id="profilePosts"></div>
+      </div>
+    </section>
+
+    <section class="page" id="friends">
+      <div class="panel">
+        <h2 class="section-title">Friends</h2>
+        <p class="muted">Find and connect with people.</p>
+        <div class="empty">👥<br><br>Friend suggestions will appear here when user accounts are connected.</div>
+      </div>
+    </section>
+
+    <section class="page" id="messages">
+      <div class="panel">
+        <h2 class="section-title">Messages</h2>
+        <p class="muted">Your conversations will appear here.</p>
+        <div class="empty">💬<br><br>Messaging needs a secure backend to connect real users.</div>
+      </div>
+    </section>
+
+    <section class="page" id="notifications">
+      <div class="panel">
+        <h2 class="section-title">Notifications</h2>
+        <div class="empty">🔔<br><br>You are all caught up!</div>
+      </div>
+    </section>
+
+    <section class="page" id="saved">
+      <div class="panel">
+        <h2 class="section-title">Saved Posts</h2>
+        <div id="savedPosts"></div>
+      </div>
+    </section>
+
+    <section class="page" id="settings">
+      <div class="panel">
+        <h2 class="section-title">Settings & Privacy</h2>
+        <div class="side-item" onclick="editProfile()">👤 Edit display name</div>
+        <div class="side-item" onclick="alert('Privacy controls will be connected to user accounts in the backend version.')">🔒 Privacy settings</div>
+        <div class="side-item" onclick="alert('Secure login and password management require backend authentication.')">🛡️ Account security</div>
+        <div class="side-item" onclick="clearLocalData()">🗑️ Clear this browser's saved posts</div>
+        <p class="muted">This prototype stores posts and preferences in this browser only. Do not use it for sensitive or private information.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <aside class="rightbar">
+    <div class="panel">
+      <h3 class="section-title">Contacts</h3>
+      <div class="contact"><div class="avatar">A</div> Connect with friends</div>
+      <div class="contact"><div class="avatar">B</div> Meet new people</div>
+      <div class="contact"><div class="avatar">C</div> Build your community</div>
+      <p class="muted">Online status will be available after backend integration.</p>
+    </div>
+    <div class="panel">
+      <h3 class="section-title">About CONNECT ME</h3>
+      <p class="muted">A place to share, discover and connect.</p>
+      <p class="muted">© 2026 CONNECT ME</p>
+    </div>
+  </aside>
+
 </div>
 
-<input id="email" type="email" placeholder="Email address">
-<input id="password" type="password" placeholder="Password">
-
-<div id="confirmField" class="hidden">
-<input id="confirmPassword" type="password" placeholder="Confirm password">
-</div>
-
-<button id="authButton" class="primary full" onclick="authenticate()">Login</button>
-
-<p class="switch" id="switchAuth" onclick="toggleAuth()">New here? Create an account</p>
-
-<p class="muted">
-Demonstration version. Real account authentication will be connected to a secure backend.
-</p>
-</div>
-</section>
-
-<!-- SOCIAL NETWORK -->
-
-<section id="social" class="hidden">
-
-<nav>
-<button class="active" onclick="showPage('home',this)">⌂</button>
-<button onclick="showPage('reels',this)">▣</button>
-<button onclick="showPage('friends',this)">♧</button>
-<button onclick="showPage('market',this)">▤</button>
-<button onclick="showPage('notifications',this)">♧</button>
-<button onclick="showPage('profile',this)">●</button>
+<nav class="mobile-nav">
+  <button class="active" onclick="showPage('home',this)">🏠</button>
+  <button onclick="showPage('friends',this)">👥</button>
+  <button onclick="openComposer()">➕</button>
+  <button onclick="showPage('messages',this)">💬</button>
+  <button onclick="showPage('profile',this)">👤</button>
 </nav>
 
-<main>
-
-<!-- HOME -->
-
-<section id="home">
-
-<div class="card">
-<b>Stories</b>
-<div class="stories">
-<div class="story">
-<button onclick="alert('Story feature coming soon!')">＋</button>
-<span>Create Story</span>
+<div class="modal-bg" id="composer">
+  <div class="modal">
+    <h3 class="section-title">Create Post</h3>
+    <textarea id="postText" placeholder="What's on your mind?"></textarea>
+    <input id="imageUrl" class="create-input" style="width:100%;margin-bottom:12px" placeholder="Optional image URL (https://...)">
+    <div style="display:flex;justify-content:flex-end;gap:10px">
+      <button class="action" onclick="closeComposer()">Cancel</button>
+      <button class="primary" onclick="createPost()">Publish</button>
+    </div>
+  </div>
 </div>
-<div class="story"><span>💜</span><span>Connect Me Community</span></div>
-<div class="story"><span>✨</span><span>Share your moments</span></div>
-<div class="story"><span>🌟</span><span>Inspire others</span></div>
-</div>
-</div>
-
-<div class="card">
-<div class="row">
-<div class="avatar" id="smallAvatar">C</div>
-<div class="composer" onclick="document.getElementById('postText').focus()">
-What's on your mind?
-</div>
-</div>
-
-<textarea id="postText" rows="2" placeholder="Write something..."></textarea>
-<input id="photoInput" type="file" accept="image/*">
-<button class="primary full" onclick="publishPost()">Publish Post</button>
-</div>
-
-<div id="feed">
-
-<article class="post">
-<div class="row">
-<div class="avatar">CM</div>
-<div>
-<b>CONNECT ME</b>
-<div class="muted">Official community · Welcome post</div>
-</div>
-</div>
-<p class="post-text">Welcome to CONNECT ME! 💜
-Connect with people, share your thoughts and inspire the community.</p>
-<div class="post-actions">
-<button onclick="likePost(this)">♡ Like</button>
-<button onclick="alert('Comment feature will be upgraded soon.')">Comment</button>
-<button onclick="sharePost()">Share</button>
-</div>
-</article>
-
-</div>
-</section>
-
-<!-- REELS -->
-
-<section id="reels" class="card hidden">
-<h2>🎬 Reels</h2>
-<p>Discover short videos and creative moments.</p>
-<p class="muted">Video uploading will be added in a future version.</p>
-</section>
-
-<!-- FRIENDS -->
-
-<section id="friends" class="card hidden">
-<h2>👥 Friends</h2>
-<p>Find people and build meaningful connections.</p>
-<p class="muted">Online friends and friend requests will be connected to the online database later.</p>
-</section>
-
-<!-- MARKETPLACE -->
-
-<section id="market" class="card hidden">
-<h2>🛍️ Marketplace</h2>
-<p>Discover products and services in your community.</p>
-</section>
-
-<!-- NOTIFICATIONS -->
-
-<section id="notifications" class="card hidden">
-<h2>🔔 Notifications</h2>
-<p>Welcome to CONNECT ME!</p>
-<p class="muted">Your notification centre.</p>
-</section>
-
-<!-- PROFILE -->
-
-<section id="profile" class="card hidden">
-<h2>My Profile</h2>
-<div class="avatar" id="profileAvatar">C</div>
-<h2 id="profileName">Your Name</h2>
-<p id="profileEmail" class="muted"></p>
-<p id="profileVisibility">Public Profile</p>
-<p id="profileActive">Active status enabled</p>
-<p>Connect. Share. Inspire. Grow. 💜</p>
-<button class="secondary" onclick="showPage('settings')">Edit Settings</button>
-<button class="primary" onclick="logout()">Logout</button>
-</section>
-
-<!-- MESSAGES -->
-
-<section id="messages" class="card hidden">
-<h2>💬 Messages</h2>
-<p class="muted">Your Connect Me inbox</p>
-
-<div class="chat-item">
-<div class="row">
-<div class="avatar">CM</div>
-<div>
-<b>Connect Me Community</b>
-<div class="muted">Welcome to Connect Me Messages</div>
-</div>
-</div>
-</div>
-
-<div id="chatMessages"></div>
-
-<textarea id="messageText" rows="3" placeholder="Write a message..."></textarea>
-<button class="primary full" onclick="sendMessage()">Send Message</button>
-
-<p class="muted">Messages are currently stored only in this browser. Online messaging will require a backend.</p>
-</section>
-
-<!-- SETTINGS -->
-
-<section id="settings" class="card hidden">
-
-<h2>⚙ Settings & Privacy</h2>
-
-<div class="settings-item">
-<h3>🔐 Account Security</h3>
-<p class="muted">Manage your account security.</p>
-<button class="secondary" onclick="alert('Real password changes will be available after secure authentication is connected.')">
-Change Password
-</button>
-</div>
-
-<hr>
-
-<div class="settings-item">
-<h3>🌍 Privacy</h3>
-
-<label>
-<input type="checkbox" id="publicProfile" checked onchange="saveSettings()">
-Public Profile
-</label>
-
-<p class="muted">This is currently a local preference, not an enforced public/private access control.</p>
-</div>
-
-<hr>
-
-<div class="settings-item">
-<h3>💾 Remember Login</h3>
-<label>
-<input type="checkbox" id="rememberLogin" onchange="saveSettings()">
-Remember my login on this device
-</label>
-<p class="muted">Only your demo profile information is remembered, never your password.</p>
-</div>
-
-<hr>
-
-<div class="settings-item">
-<h3>🟢 Active Status</h3>
-<label>
-<input type="checkbox" id="activeStatus" checked onchange="saveSettings()">
-Show when I am active
-</label>
-</div>
-
-<hr>
-
-<div class="settings-item">
-<h3>💬 Message Privacy</h3>
-<select id="messagePrivacy" onchange="saveSettings()">
-<option value="everyone">Everyone can message me</option>
-<option value="friends">Friends only</option>
-<option value="nobody">Nobody</option>
-</select>
-</div>
-
-<hr>
-
-<p id="settingsStatus" class="muted">Settings are saved on this device.</p>
-
-<button class="primary full" onclick="logout()">Logout</button>
-
-</section>
-
-</main>
-</section>
-
-<footer>
-© 2026 CONNECT ME
-<br>Connect. Share. Inspire. Grow. 💜
-</footer>
 
 <script>
+const STORAGE_KEY = "connectme_posts_v1";
+const NAME_KEY = "connectme_name_v1";
 
-let registerMode=false;
-let currentUser=null;
+let posts = [];
+let savedIds = [];
+let userName = localStorage.getItem(NAME_KEY) || "Connect Me User";
 
-const settingsKey='connectMeSettings';
-const accountKey='connectMeDemoProfile';
+try {
+  posts = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  if (!Array.isArray(posts)) posts = [];
+} catch(e) { posts = []; }
 
-function toggleAuth(){
-
-registerMode=!registerMode;
-
-document.getElementById('registerFields').classList.toggle('hidden',!registerMode);
-document.getElementById('confirmField').classList.toggle('hidden',!registerMode);
-
-document.getElementById('authTitle').innerText=
-registerMode?'Create Your Account 💜':'Welcome to CONNECT ME 💜';
-
-document.getElementById('authButton').innerText=
-registerMode?'Register':'Login';
-
-document.getElementById('switchAuth').innerText=
-registerMode?'Already a member? Login':'New here? Create an account';
+function savePosts() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
 }
 
-function authenticate(){
+function showPage(page, button) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  const target = document.getElementById(page);
+  if (target) target.classList.add("active");
 
-const email=document.getElementById('email').value.trim();
-const password=document.getElementById('password').value;
-let name=document.getElementById('fullName').value.trim();
+  document.querySelectorAll(".mobile-nav button").forEach(b => b.classList.remove("active"));
+  if (button) button.classList.add("active");
 
-if(!email||!password){
-alert('Please enter your email and password.');
-return;
+  if (page === "profile") renderProfile();
+  if (page === "saved") renderSaved();
 }
 
-if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-alert('Please enter a valid email address.');
-return;
+function openComposer() {
+  document.getElementById("composer").style.display = "flex";
+}
+function closeComposer() {
+  document.getElementById("composer").style.display = "none";
 }
 
-if(registerMode){
+function createPost() {
+  const text = document.getElementById("postText").value.trim();
+  const image = document.getElementById("imageUrl").value.trim();
 
-if(!name){
-alert('Please enter your name.');
-return;
+  if (!text && !image) {
+    alert("Please write something or add an image.");
+    return;
+  }
+
+  if (image && !/^https:\/\/\S+$/i.test(image)) {
+    alert("Please enter a valid HTTPS image URL.");
+    return;
+  }
+
+  posts.unshift({
+    id: Date.now(),
+    name: userName,
+    text,
+    image,
+    likes: 0,
+    liked: false,
+    comments: [],
+    time: new Date().toLocaleString()
+  });
+
+  savePosts();
+  document.getElementById("postText").value = "";
+  document.getElementById("imageUrl").value = "";
+  closeComposer();
+  showPage("home");
+  renderFeed();
 }
 
-if(password.length<8){
-alert('Please use at least 8 characters.');
-return;
+function renderFeed(list = posts) {
+  const feed = document.getElementById("feed");
+
+  if (!list.length) {
+    feed.innerHTML = '<div class="panel empty">🌍<br><br>Welcome to CONNECT ME!<br>Be the first to share a post.</div>';
+    return;
+  }
+
+  feed.innerHTML = list.map(post => `
+    <article class="panel">
+      <div class="post-head">
+        <div class="avatar">${escapeHTML(post.name.slice(0,2).toUpperCase())}</div>
+        <div>
+          <div class="post-name">${escapeHTML(post.name)}</div>
+          <div class="post-time">${escapeHTML(post.time)}</div>
+        </div>
+      </div>
+      ${post.text ? `<div class="post-text">${escapeHTML(post.text)}</div>` : ""}
+      ${post.image ? `<img class="post-image" src="${escapeHTML(post.image)}" alt="Post image" loading="lazy" onerror="this.style.display='none'">` : ""}
+      <div class="post-stats">
+        <span>👍 ${post.likes || 0} likes</span>
+        <span>${(post.comments || []).length} comments</span>
+      </div>
+      <div class="post-actions">
+        <button class="${post.liked ? 'liked' : ''}" onclick="toggleLike(${post.id})">${post.liked ? '👍 Liked' : '👍 Like'}</button>
+        <button onclick="commentOnPost(${post.id})">💬 Comment</button>
+        <button onclick="savePost(${post.id})">🔖 Save</button>
+      </div>
+      <div style="margin-top:10px">
+        ${(post.comments || []).map(c => `<p class="muted"><b>${escapeHTML(c.name)}:</b> ${escapeHTML(c.text)}</p>`).join("")}
+      </div>
+    </article>
+  `).join("");
 }
 
-if(password!==document.getElementById('confirmPassword').value){
-alert('Passwords do not match.');
-return;
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[char]);
 }
 
-}else{
-name='Connect Me Member';
+function toggleLike(id) {
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+  post.liked = !post.liked;
+  post.likes = Math.max(0, (post.likes || 0) + (post.liked ? 1 : -1));
+  savePosts();
+  renderFeed();
 }
 
-currentUser={name,email};
-
-enterApp();
+function commentOnPost(id) {
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+  const comment = prompt("Write your comment:");
+  if (!comment || !comment.trim()) return;
+  post.comments = post.comments || [];
+  post.comments.push({name:userName, text:comment.trim()});
+  savePosts();
+  renderFeed();
 }
 
-function enterApp(){
-
-document.getElementById('auth').classList.add('hidden');
-document.getElementById('social').classList.remove('hidden');
-
-document.getElementById('profileName').innerText=currentUser.name;
-document.getElementById('profileEmail').innerText=currentUser.email;
-
-const initial=currentUser.name.charAt(0).toUpperCase();
-
-document.getElementById('profileAvatar').innerText=initial;
-document.getElementById('smallAvatar').innerText=initial;
-
-loadSettings();
-showPage('home');
+function savePost(id) {
+  if (!savedIds.includes(id)) savedIds.push(id);
+  localStorage.setItem("connectme_saved_v1", JSON.stringify(savedIds));
+  alert("Post saved in this browser.");
 }
 
-function logout(){
+function renderSaved() {
+  try {
+    savedIds = JSON.parse(localStorage.getItem("connectme_saved_v1") || "[]");
+  } catch(e) { savedIds = []; }
 
-currentUser=null;
-
-sessionStorage.removeItem('connectMeSession');
-
-document.getElementById('social').classList.add('hidden');
-document.getElementById('auth').classList.remove('hidden');
-
-document.getElementById('email').value='';
-document.getElementById('password').value='';
-document.getElementById('fullName').value='';
-document.getElementById('confirmPassword').value='';
-
-if(registerMode)toggleAuth();
+  const list = posts.filter(p => savedIds.includes(p.id));
+  document.getElementById("savedPosts").innerHTML = list.length
+    ? list.map(p => `<div class="panel"><b>${escapeHTML(p.name)}</b><p>${escapeHTML(p.text)}</p></div>`).join("")
+    : '<div class="empty">No saved posts yet.</div>';
 }
 
-function showPage(page,button){
-
-const pages=[
-'home','reels','friends','market',
-'notifications','profile','messages','settings'
-];
-
-pages.forEach(id=>{
-document.getElementById(id).classList.toggle('hidden',id!==page);
-});
-
-document.querySelectorAll('nav button').forEach(b=>{
-b.classList.remove('active');
-});
-
-if(button)button.classList.add('active');
-
-if(page==='settings')loadSettings();
-if(page==='profile')updateProfile();
+function renderProfile() {
+  document.getElementById("profileName").textContent = userName;
+  const mine = posts.filter(p => p.name === userName);
+  document.getElementById("profilePosts").innerHTML = mine.length
+    ? mine.map(p => `<div class="panel">${escapeHTML(p.text)}</div>`).join("")
+    : '<div class="empty">Your posts will appear here.</div>';
 }
 
-function likePost(button){
-
-button.innerText=button.innerText.includes('Liked')?'♡ Like':'♥ Liked';
-
+function editProfile() {
+  const newName = prompt("Enter your display name:", userName);
+  if (!newName || !newName.trim()) return;
+  userName = newName.trim().slice(0,40);
+  localStorage.setItem(NAME_KEY, userName);
+  document.getElementById("profileName").textContent = userName;
+  alert("Display name updated in this browser.");
 }
 
-function sharePost(){
-
-if(navigator.share){
-navigator.share({
-title:'CONNECT ME',
-text:'Join the CONNECT ME social community!'
-}).catch(()=>{});
-}else{
-alert('Share CONNECT ME with your friends!');
+function searchPosts() {
+  const query = document.getElementById("searchInput").value.toLowerCase().trim();
+  const results = posts.filter(p =>
+    p.text.toLowerCase().includes(query) ||
+    p.name.toLowerCase().includes(query)
+  );
+  showPage("home");
+  renderFeed(query ? results : posts);
 }
 
+function clearLocalData() {
+  if (!confirm("Clear all posts and saved data stored by this prototype in this browser?")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem("connectme_saved_v1");
+  posts = [];
+  savedIds = [];
+  renderFeed();
+  alert("Local prototype data cleared.");
 }
 
-function publishPost(){
+try {
+  savedIds = JSON.parse(localStorage.getItem("connectme_saved_v1") || "[]");
+} catch(e) { savedIds = []; }
 
-const text=document.getElementById('postText').value.trim();
-const file=document.getElementById('photoInput').files[0];
-
-if(!text&&!file){
-alert('Please write something or select a photo.');
-return;
-}
-
-const article=document.createElement('article');
-article.className='post';
-
-const heading=document.createElement('div');
-heading.className='row';
-
-const avatar=document.createElement('div');
-avatar.className='avatar';
-avatar.textContent=currentUser.name.charAt(0).toUpperCase();
-
-const name=document.createElement('b');
-name.textContent=currentUser.name;
-
-heading.append(avatar,name);
-article.append(heading);
-
-if(text){
-const paragraph=document.createElement('p');
-paragraph.className='post-text';
-paragraph.textContent=text;
-article.append(paragraph);
-}
-
-if(file){
-
-if(!file.type.startsWith('image/')){
-alert('Please select an image.');
-return;
-}
-
-const image=document.createElement('img');
-image.className='post-image';
-image.src=URL.createObjectURL(file);
-article.append(image);
-}
-
-const actions=document.createElement('div');
-actions.className='post-actions';
-
-const like=document.createElement('button');
-like.textContent='♡ Like';
-like.onclick=()=>likePost(like);
-
-const comment=document.createElement('button');
-comment.textContent='Comment';
-comment.onclick=()=>alert('Comments coming soon.');
-
-const share=document.createElement('button');
-share.textContent='Share';
-share.onclick=sharePost;
-
-actions.append(like,comment,share);
-article.append(actions);
-
-document.getElementById('feed').prepend(article);
-
-document.getElementById('postText').value='';
-document.getElementById('photoInput').value='';
-
-showPage('home');
-
-}
-
-function sendMessage(){
-
-const field=document.getElementById('messageText');
-const message=field.value.trim();
-
-if(!message)return;
-
-const item=document.createElement('div');
-item.className='message-mine';
-item.textContent=message;
-
-document.getElementById('chatMessages').append(item);
-
-field.value='';
-
-}
-
-function saveSettings(){
-
-const settings={
-publicProfile:document.getElementById('publicProfile').checked,
-rememberLogin:document.getElementById('rememberLogin').checked,
-activeStatus:document.getElementById('activeStatus').checked,
-messagePrivacy:document.getElementById('messagePrivacy').value
-};
-
-localStorage.setItem(settingsKey,JSON.stringify(settings));
-
-if(currentUser){
-
-if(settings.rememberLogin){
-localStorage.setItem(accountKey,JSON.stringify(currentUser));
-}else{
-localStorage.removeItem(accountKey);
-}
-
-}
-
-document.getElementById('settingsStatus').innerText=
-'Your preferences have been saved on this device.';
-
-updateProfile();
-
-}
-
-function loadSettings(){
-
-let saved=localStorage.getItem(settingsKey);
-
-let settings={
-publicProfile:true,
-rememberLogin:false,
-activeStatus:true,
-messagePrivacy:'everyone'
-};
-
-if(saved){
-try{
-settings={...settings,...JSON.parse(saved)};
-}catch(e){}
-}
-
-document.getElementById('publicProfile').checked=settings.publicProfile;
-document.getElementById('rememberLogin').checked=settings.rememberLogin;
-document.getElementById('activeStatus').checked=settings.activeStatus;
-document.getElementById('messagePrivacy').value=settings.messagePrivacy;
-
-updateProfile();
-
-}
-
-function updateProfile(){
-
-const publicProfile=document.getElementById('publicProfile').checked;
-const active=document.getElementById('activeStatus').checked;
-
-document.getElementById('profileVisibility').innerText=
-publicProfile?'🌍 Public Profile':'🔒 Private Preference';
-
-document.getElementById('profileActive').innerText=
-active?'🟢 Active status enabled':'⚪ Active status hidden';
-
-}
-
-function restoreDemoSession(){
-
-const saved=localStorage.getItem(accountKey);
-
-if(!saved)return;
-
-try{
-
-const profile=JSON.parse(saved);
-
-if(profile.name&&profile.email){
-
-currentUser=profile;
-enterApp();
-
-}
-
-}catch(e){
-
-localStorage.removeItem(accountKey);
-
-}
-
-}
-
-restoreDemoSession();
-
+renderFeed();
 </script>
 </body>
 </html>
